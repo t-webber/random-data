@@ -1,4 +1,4 @@
-pub const SCHOOL_SUBJECTS: [&str; 150] = [
+pub const SCHOOL_SUBJECTS: [&str; 144] = [
     "Mathematics",
     "Algebra",
     "Geometry",
@@ -145,7 +145,7 @@ pub const SCHOOL_SUBJECTS: [&str; 150] = [
     "Urban Studies",
 ];
 
-pub const ACADEMIC_DISCIPLINES: [&str; 150] = [
+pub const ACADEMIC_DISCIPLINES: [&str; 142] = [
     "Mathematics",
     "Applied Mathematics",
     "Pure Mathematics",
@@ -290,7 +290,7 @@ pub const ACADEMIC_DISCIPLINES: [&str; 150] = [
     "Sports Science",
 ];
 
-pub const DEGREES_TITLES: [&str; 150] = [
+pub const DEGREES_TITLES: [&str; 146] = [
     "High School Diploma",
     "General Certificate of Secondary Education",
     "A-Level",
@@ -439,7 +439,7 @@ pub const DEGREES_TITLES: [&str; 150] = [
     "Credential",
 ];
 
-pub const FAMOUS_UNIVERSITIES: [&str; 150] = [
+pub const FAMOUS_UNIVERSITIES: [&str; 145] = [
     "Harvard University",
     "University of Oxford",
     "Stanford University",
