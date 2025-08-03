@@ -32,22 +32,26 @@ impl DataGenerator {
     }
 }
 
+use rand::seq::IndexedRandom;
+use rand::seq::SliceRandom;
+use std::fmt;
+
 macro_rules! strings {
     ($($module:ident, $variant:ident, $const:ident)*) => {
 
-        use std::fmt;
-        use rand::seq::SliceRandom;
-        use rand::seq::IndexedRandom;
 
         #[non_exhaustive]
+        #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone)]
         pub enum DataType {
             $($variant,)*
         }
 
-        impl fmt::Display for DataType {
-            fn fmt(&self, f :&mut fmt::Formatter<'_>) -> fmt::Result {
+        impl DataType {
+            const LIST: &[Self] = &[ $(Self::$variant,)* ];
+
+            pub fn values(&self) -> &'static[&'static str] {
                 match self {
-                    $(Self::$variant => stringify!($variant).fmt(f),)*
+                    $( Self::$variant => &$module::$const,)*
                 }
             }
         }
@@ -62,16 +66,36 @@ macro_rules! strings {
 
                 }
             }
-
         }
 
         impl DataGenerator {
-            pub fn random(&mut self, data_type: DataType) -> &'static str {
+
+            pub fn random(&mut self, data_type: &DataType) -> &'static str {
                 match data_type {
                     $( DataType::$variant => (crate::strings::$module::$const).choose(&mut self.0).unwrap(),)* }
             }
         }
     };
+}
+
+impl DataType {
+    pub const fn list() -> &'static [Self] {
+        Self::LIST
+    }
+}
+
+impl fmt::Display for DataType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{self:?}")
+    }
+}
+
+impl TryFrom<&String> for DataType {
+    type Error = ();
+
+    fn try_from(value: &String) -> Result<Self, Self::Error> {
+        Self::try_from(value.as_str())
+    }
 }
 
 strings!(
@@ -82,15 +106,13 @@ animals, Insects, INSECTS
 animals, Fishes, FISHES
 animals, Amphibians, AMPHIBIANS
 animals, Reptiles, REPTILES
-animals, Arachnids, ARACHNIDS
 animals, Mollusks, MOLLUSKS
-animals, Crustaceans, CRUSTACEANS
 animals, AnimalTypes, ANIMAL_TYPES
 art, LiteraryGenres, LITERARY_GENRES
 art, ArchitecturalStyles, ARCHITECTURAL_STYLES
 art, MusicalGenres, MUSICAL_GENRES
 art, MusicalInstruments, MUSICAL_INSTRUMENTS
-colours, ColorNames, COLOR_NAMES
+colours, ColourNames, COLOUR_NAMES
 companies, CarBrands, CAR_BRANDS
 companies, CompanyNames, COMPANY_NAMES
 companies, Jobs, JOBS

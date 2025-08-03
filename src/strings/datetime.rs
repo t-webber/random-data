@@ -1,51 +1,52 @@
-pub const DAYS_OF_WEEK: [&str; 7] = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
+pub const DAYS_OF_WEEK: &[&str] = &[
     "Friday",
+    "Monday",
     "Saturday",
     "Sunday",
+    "Thursday",
+    "Tuesday",
+    "Wednesday",
 ];
 
-pub const MONTHS: [&str; 12] = [
-    "January",
-    "February",
-    "March",
+pub const MONTHS: &[&str] = &[
     "April",
-    "May",
-    "June",
-    "July",
     "August",
-    "September",
-    "October",
-    "November",
     "December",
+    "February",
+    "January",
+    "July",
+    "June",
+    "March",
+    "May",
+    "November",
+    "October",
+    "September",
 ];
 
-pub const DAYS_OF_WEEK_ABBR: [&str; 7] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+pub const DAYS_OF_WEEK_ABBR: &[&str] = &["Fri", "Mon", "Sat", "Sun", "Thu", "Tue", "Wed"];
 
-pub const MONTHS_ABBR: [&str; 12] = [
-    "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+pub const MONTHS_ABBR: &[&str] = &[
+    "Apr", "Aug", "Dec", "Feb", "Jan", "Jul", "Jun", "Mar", "May", "Nov", "Oct", "Sep",
 ];
 
-pub const TIME_ZONES: [&str; 41] = [
-    "UTC", "GMT", "EST", "EDT", "CST", "CDT", "MST", "MDT", "PST", "PDT", "AKST", "AKDT", "HST",
-    "BST", "CET", "CEST", "EET", "EEST", "IST", "PKT", "BST", "WET", "WEST", "MSK", "JST", "KST",
-    "AST", "ADT", "HKT", "SGT", "MYT", "ICT", "NPT", "IRST", "IDT", "CAT", "EAT", "SAST", "WAT",
-    "ChST", "FJT",
+pub const TIME_ZONES: &[&str] = &[
+    "ADT", "AKDT", "AKST", "AST", "BST", "CAT", "CDT", "CEST", "CET", "CST", "ChST", "EAT", "EDT",
+    "EEST", "EET", "EST", "FJT", "GMT", "HKT", "HST", "ICT", "IDT", "IRST", "IST", "JST", "KST",
+    "MDT", "MSK", "MST", "MYT", "NPT", "PDT", "PKT", "PST", "SAST", "SGT", "UTC", "WAT", "WEST",
+    "WET",
 ];
-pub const TIME_UNITS: [&str; 10] = [
-    "Second",
-    "Minute",
-    "Hour",
-    "Day",
-    "Week",
-    "Month",
-    "Year",
-    "Decade",
+
+pub const TIME_UNITS: &[&str] = &[
     "Century",
+    "Day",
+    "Decade",
+    "Hour",
     "Millennium",
+    "Minute",
+    "Month",
+    "Second",
+    "Week",
+    "Year",
 ];
 
-pub const AM_PM: [&str; 2] = ["AM", "PM"];
+pub const AM_PM: &[&str] = &["AM", "PM"];
