@@ -1,4 +1,4 @@
-pub const FIRSTNAMES: &[&str] = &[
+pub const FIRST_NAMES: &[&str] = &[
     "Aaron",
     "Albert",
     "Alexander",
@@ -153,7 +153,7 @@ pub const FIRSTNAMES: &[&str] = &[
     "Zachary",
 ];
 
-pub const FRENCH_FIRSTNAMES: &[&str] = &[
+pub const FRENCH_FIRST_NAMES: &[&str] = &[
     "Adam",
     "Agathe",
     "Alain",
@@ -289,7 +289,7 @@ pub const FRENCH_FIRSTNAMES: &[&str] = &[
     "Éric",
 ];
 
-pub const FRENCH_LASTNAMES: &[&str] = &[
+pub const FRENCH_LAST_NAMES: &[&str] = &[
     "Adam",
     "Albert",
     "André",
@@ -416,7 +416,7 @@ pub const FRENCH_LASTNAMES: &[&str] = &[
     "Vincent",
 ];
 
-pub const ENGLISH_LASTNAMES: &[&str] = &[
+pub const LAST_NAMES: &[&str] = &[
     "Adams",
     "Alexander",
     "Armstrong",

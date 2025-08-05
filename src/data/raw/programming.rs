@@ -244,7 +244,7 @@ pub const PROGRAMMING_PARADIGMS: &[&str] = &[
     "XML Programming",
 ];
 
-pub const EDITOR_COLOR_THEMES: &[&str] = &[
+pub const EDITOR_COLOUR_THEMES: &[&str] = &[
     "Atom Dark",
     "Atom One Dark",
     "Atom One Dark Reasonable",
@@ -327,8 +327,8 @@ pub const EDITOR_COLOR_THEMES: &[&str] = &[
     "One Light",
     "Palenight",
     "Panda",
-    "PaperColor",
-    "PaperColor Light",
+    "PaperColour",
+    "PaperColour Light",
     "Paraiso Dark",
     "Paraiso Light",
     "Pastels on Dark",

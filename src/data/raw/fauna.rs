@@ -1,4 +1,4 @@
-pub const COMMON_ANIMALS: &[&str] = &[
+pub const ANIMALS: &[&str] = &[
     "African Elephant",
     "African Grey Parrot",
     "African Lion",
@@ -1359,7 +1359,7 @@ pub const REPTILES: &[&str] = &[
     "Zebra-tailed Lizard",
 ];
 
-pub const MOLLUSKS: &[&str] = &[
+pub const MOLLUSC: &[&str] = &[
     "Abalone",
     "Amber Snail",
     "Apple Snail",

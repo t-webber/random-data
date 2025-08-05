@@ -31,7 +31,9 @@
 // #![expect(clippy::non_ascii_literal, reason = "not-understandable")]
 // #![expect(clippy::self_named_module_files, reason = "style choice")]
 
-mod strings;
+use std::ops::Range;
 
-pub use strings::DataGenerator;
-pub use strings::DataType;
+pub use crate::{data::DataType, generator::DataGenerator};
+
+mod data;
+mod generator;

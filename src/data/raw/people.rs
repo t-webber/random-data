@@ -1,4 +1,4 @@
-pub const FAMOUS_PAINTERS: &[&str] = &[
+pub const PAINTERS: &[&str] = &[
     "Ai Weiwei",
     "Albrecht Dürer",
     "Alfred Munnings",
@@ -145,7 +145,7 @@ pub const FAMOUS_PAINTERS: &[&str] = &[
     "Élisabeth Vigée Le Brun",
 ];
 
-pub const FAMOUS_WRITERS: &[&str] = &[
+pub const WRITERS: &[&str] = &[
     "Adrienne Rich",
     "Agatha Christie",
     "Albert Camus",
@@ -268,7 +268,7 @@ pub const FAMOUS_WRITERS: &[&str] = &[
     "Zadie Smith",
 ];
 
-pub const FAMOUS_COMPOSERS: &[&str] = &[
+pub const COMPOSERS: &[&str] = &[
     "Aaron Copland",
     "Alban Berg",
     "Alexander Borodin",
@@ -387,7 +387,7 @@ pub const FAMOUS_COMPOSERS: &[&str] = &[
     "Wolfgang Amadeus Mozart",
 ];
 
-pub const FAMOUS_MATHEMATICIANS: &[&str] = &[
+pub const MATHEMATICIANS: &[&str] = &[
     "Alan Baker",
     "Alan Turing",
     "Alexander Fleming",
@@ -483,7 +483,7 @@ pub const FAMOUS_MATHEMATICIANS: &[&str] = &[
     "Évariste Galois",
 ];
 
-pub const FAMOUS_PHYSICIANS: &[&str] = &[
+pub const PHYSICIANS: &[&str] = &[
     "Alessandro Volta",
     "Alexander Fleming",
     "Alfred Adler",
@@ -568,7 +568,7 @@ pub const FAMOUS_PHYSICIANS: &[&str] = &[
     "William Withering",
 ];
 
-pub const FAMOUS_BIOLOGISTS: &[&str] = &[
+pub const BIOLOGISTS: &[&str] = &[
     "Alexander von Humboldt",
     "Alfred Kinsey",
     "Alfred Russel Wallace",
@@ -638,7 +638,7 @@ pub const FAMOUS_BIOLOGISTS: &[&str] = &[
     "Wilhelm Roux",
 ];
 
-pub const FAMOUS_COMPUTER_SCIENTISTS: &[&str] = &[
+pub const COMPUTER_SCIENTISTS: &[&str] = &[
     "Ada Lovelace",
     "Adi Shamir",
     "Alan Kay",
@@ -790,7 +790,7 @@ pub const FAMOUS_COMPUTER_SCIENTISTS: &[&str] = &[
     "Yukihiro Matsumoto",
 ];
 
-pub const FAMOUS_PHILOSOPHERS: &[&str] = &[
+pub const PHILOSOPHERS: &[&str] = &[
     "Al-Farabi",
     "Al-Ghazali",
     "Anaxagoras",
@@ -881,4 +881,3 @@ pub const FAMOUS_PHILOSOPHERS: &[&str] = &[
     "Zeno of Citium",
     "Zeno of Elea",
 ];
-

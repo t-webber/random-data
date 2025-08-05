@@ -438,7 +438,7 @@ pub const DEGREES_TITLES: &[&str] = &[
     "Vocational Certificate",
 ];
 
-pub const FAMOUS_UNIVERSITIES: &[&str] = &[
+pub const UNIVERSITIES: &[&str] = &[
     "Aarhus University",
     "Australian National University (ANU)",
     "Autonomous University of Barcelona",
@@ -640,4 +640,3 @@ pub const FAMOUS_UNIVERSITIES: &[&str] = &[
     "Yonsei University",
     "École Polytechnique Fédérale de Lausanne (EPFL)",
 ];
-
