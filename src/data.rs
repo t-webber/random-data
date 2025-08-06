@@ -155,8 +155,10 @@ personal, Email, email
 personal, FrenchEmail, french_email
 personal, FrenchPhoneNumber, french_phone_number
 personal, NhsNumber, nhs_number
+personal, Password, password
 personal, PhoneNumber, phone_number
 personal, SecuriteSociale, securite_sociale
+personal, Sentence, sentence
 personal, UkPhoneNumber, uk_phone_number
 primitive, AlphanumericCapitalChar, alphanumeric_capital_char
 primitive, AlphanumericChar, alphanumeric_char

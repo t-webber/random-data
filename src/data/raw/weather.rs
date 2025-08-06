@@ -10,4 +10,3 @@ pub const TYPES_OF_CLOUDS: &[&str] = &[
     "Stratocumulus",
     "Stratus",
 ];
-

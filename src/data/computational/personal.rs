@@ -94,3 +94,24 @@ pub fn securite_sociale(generator: &mut DataGenerator) -> String {
     let key = 97 - value.rem_euclid(97);
     format!("{nir}{key}")
 }
+
+pub fn password(generator: &mut DataGenerator) -> String {
+    let mut output = String::new();
+    let len = generator.rng().random_range(10..20);
+    for _ in 0u32..len {
+        output.push(generator.rng().random_range(0u8..127).into());
+    }
+    output
+}
+
+pub fn sentence(generator: &mut DataGenerator) -> String {
+    let mut output = String::new();
+    let len = generator.rng().random_range(10..20);
+    for _ in 0u32..len {
+        output.push_str(&DataType::Word.random(generator));
+        output.push(' ');
+    }
+    output.push_str(&DataType::Word.random(generator));
+    output.push('.');
+    output
+}

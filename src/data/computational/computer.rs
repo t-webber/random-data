@@ -1,4 +1,4 @@
-use rand::Rng as _;
+use rand::Rng;
 
 use crate::{DataGenerator, DataType};
 
@@ -80,4 +80,14 @@ pub fn ipv6(generator: &mut DataGenerator) -> String {
         generator.rng().random_range(0..=0xffff),
         generator.rng().random_range(0..=0xffff),
     )
+}
+
+pub fn dir_path(generator: &mut DataGenerator) -> String {
+    let len = generator.rng().random_range(0u32..=5);
+    let mut output = String::from("/");
+    for _ in 0..len {
+        output.push_str(&DataType::Word.random(generator));
+        output.push('/');
+    }
+    output
 }
