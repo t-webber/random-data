@@ -10,30 +10,79 @@ use rand::seq::SliceRandom;
 use std::fmt;
 
 macro_rules! strings {
-    ($($o_module:ident, $o_variant:ident, $o_func:ident)*;  $($s_module:ident, $s_variant:ident, $s_const:ident)*) => {
+    ($($fn_module:ident, $fn_variant:ident, $fn_func:ident)*;  $($list_module:ident, $list_variant:ident, $list_const:ident)*) => {
 
 
+            /// Representation of type that can be generated randomly.
+            ///
+            /// There are two types of generated data: some are hard-coded with a list of possible
+            /// values, others are produced by formulas. Both are usable the same way:
+            ///
+            /// ```
+            /// use random_data::*;
+            /// let mut g = DataGenerator::new();
+            ///
+            /// let random_month = DataType::Month.random(&mut g);
+            /// println!("{random_month}");
+            ///
+            /// let random_address = DataType::Address.random(&mut g);
+            /// println!("{random_address}");
+            /// ```
         #[non_exhaustive]
         #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone)]
         pub enum DataType {
-            $($s_variant,)*
-            $($o_variant,)*
+            $($fn_variant,)*
+            $($list_variant,)*
         }
 
         impl DataType {
-            const LIST: &[Self] = &[ $(Self::$s_variant,)* $(Self::$o_variant,)* ];
+            /// List of all the available data types.
+            const LIST: &[Self] = &[
+                $(Self::$fn_variant,)*
+                $(Self::$list_variant,)*
+            ];
 
+            /// Returns the list of possible values of a data type if applicable
+            ///
+            /// # Returns
+            ///
+            /// - Some if the data type is defined by a list of values
+            /// - None if it is generated from a formula
+            ///
+            /// # Examples
+            ///
+            /// ```
+            /// use random_data::*;
+            /// let mut g = DataGenerator::new();
+            ///
+            /// let month = DataType::Month.random(&mut g);
+            /// let all_months = DataType::Month.values().unwrap();
+            /// assert!(all_months.contains(&month.as_ref()));
+            ///
+            /// assert!(DataType::Address.values().is_none());
+            /// ```
             pub fn values(&self) -> Option<&'static[&'static str]> {
                 match self {
-                    $( Self::$s_variant => Some(&$s_module::$s_const),)*
+                    $( Self::$list_variant => Some(&$list_module::$list_const),)*
                         _ => None
                 }
             }
 
+            /// Generate a random value of the according [`DataType`]
+            ///
+            /// # Examples
+            ///
+            /// ```
+            /// use random_data::*;
+            /// let mut g = DataGenerator::new();
+            ///
+            /// let random_address = DataType::Address.random(&mut g);
+            /// println!("{random_address}");
+            /// ```
             pub fn random(&self, g: &mut DataGenerator) -> String {
                 match self {
-                    $( DataType::$s_variant => ($s_module::$s_const).choose(g.rng()).unwrap().to_string(),)*
-                    $( DataType::$o_variant => $o_module::$o_func(g), )*
+                    $( DataType::$fn_variant => $fn_module::$fn_func(g), )*
+                    $( DataType::$list_variant => ($list_module::$list_const).choose(g.rng()).unwrap().to_string(),)*
                 }
             }
         }
@@ -43,17 +92,14 @@ macro_rules! strings {
 
             fn try_from(value: &str) -> Result<Self, ()> {
                 match value {
-                    $( stringify!($s_variant) => Ok(Self::$s_variant), )*
-                    $( stringify!($o_variant) => Ok(Self::$o_variant), )*
+                    $( stringify!($fn_variant) => Ok(Self::$fn_variant), )*
+                    $( stringify!($list_variant) => Ok(Self::$list_variant), )*
                     _ => Err(())
 
                 }
             }
         }
 
-        impl DataGenerator {
-
-        }
     };
 }
 
@@ -87,6 +133,9 @@ address, LatitudeLongitude, latitude_longitude
 address, Longitude, longitude
 address, UkAddress, uk_address
 address, UkPostCode, uk_post_code
+computer, Semver, semver
+computer, SemverStable, semver_stable
+computer, SemverUnstable, semver_unstable
 isbn, RandomIsbn10, random_isbn10
 isbn, RandomIsbn13, random_isbn13
 personal, Email, email

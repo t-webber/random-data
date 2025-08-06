@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-use fake_data::{DataGenerator, DataType};
+use random_data::{DataGenerator, DataType};
 
 #[test]
 fn string() {
@@ -13,9 +13,9 @@ fn string() {
 #[test]
 fn non_empty() {
     let mut generator = DataGenerator::new();
-    let list = DataType::list();
+    let list = dbg!(DataType::list());
     for data_type in list {
-        for _ in 0..1000 {
+        for _ in 0..10000 {
             assert!(!data_type.random(&mut generator).is_empty());
         }
     }
