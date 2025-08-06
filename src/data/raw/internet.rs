@@ -228,3 +228,15 @@ pub const OPEN_SOURCE_APPS: &[&str] = &[
     "qBittorrent",
     "qutebrowser",
 ];
+
+pub const TOP_LEVEL_DOMAINS: &[&str] = &[
+    "com", "org", "net", "edu", "gov", "mil", "int", "us", "ca", "uk", "de", "fr", "es", "it",
+    "nl", "se", "no", "fi", "dk", "au", "nz", "jp", "kr", "cn", "in", "br", "ru", "ch", "at", "be",
+    "ie", "pt", "pl", "cz", "sk", "hu", "ro", "gr", "il", "mx", "za", "tr", "id", "th", "hk", "tw",
+    "vn", "my", "ae", "sa", "ir", "eg", "pk", "bd", "ng", "ke", "gh", "tz", "ug", "ph", "lk", "sg",
+    "io", "ai", "tv", "me", "co", "info", "biz", "name", "pro", "dev", "app", "tech", "cloud",
+    "store", "online", "site", "xyz", "top", "co.uk", "ac.uk", "gov.uk", "org.uk", "co.au",
+    "edu.au", "gov.au", "org.au", "co.in", "org.in", "gov.in", "nic.in", "co.jp", "or.jp", "go.jp",
+    "com.cn", "gov.cn", "org.cn", "com.br", "gov.br", "org.br", "co.kr", "go.kr", "com.mx",
+    "gob.mx", "edu.mx", "co.za", "gov.za", "com.sg", "gov.sg",
+];

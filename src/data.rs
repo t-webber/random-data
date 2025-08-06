@@ -1,15 +1,15 @@
+mod computational;
 mod raw;
-
+use crate::data::raw::*;
+use crate::generator::DataGenerator;
 use rand::Rng as _;
 use rand::rngs::ThreadRng;
-
-use crate::generator::DataGenerator;
 use rand::seq::IndexedRandom;
 use rand::seq::SliceRandom;
 use std::fmt;
 
 macro_rules! strings {
-    ($($o_variant:ident: $o_func:expr;)*;  $($s_module:ident, $s_variant:ident, $s_const:ident)*) => {
+    ($($o_variant:ident: $o_func:ident;)*;  $($s_module:ident, $s_variant:ident, $s_const:ident)*) => {
 
 
         #[non_exhaustive]
@@ -20,7 +20,7 @@ macro_rules! strings {
         }
 
         impl DataType {
-            const LIST: &[Self] = &[ $(Self::$s_variant,)* ];
+            const LIST: &[Self] = &[ $(Self::$s_variant,)* $(Self::$o_variant,)* ];
 
             pub fn values(&self) -> Option<&'static[&'static str]> {
                 match self {
@@ -31,8 +31,8 @@ macro_rules! strings {
 
             pub fn random(&self, g: &mut DataGenerator) -> String {
                 match self {
-                    $( DataType::$s_variant => (crate::knowledge::$s_module::$s_const).choose(g.rng()).unwrap().to_string(),)*
-                    $( DataType::$o_variant => $o_func(g), )*
+                    $( DataType::$s_variant => ($s_module::$s_const).choose(g.rng()).unwrap().to_string(),)*
+                    $( DataType::$o_variant => crate::data::computational::$o_func(g), )*
                 }
             }
         }
@@ -43,6 +43,7 @@ macro_rules! strings {
             fn try_from(value: &str) -> Result<Self, ()> {
                 match value {
                     $( stringify!($s_variant) => Ok(Self::$s_variant), )*
+                    $( stringify!($o_variant) => Ok(Self::$o_variant), )*
                     _ => Err(())
 
                 }
@@ -75,130 +76,28 @@ impl TryFrom<&String> for DataType {
     }
 }
 
-fn random_isbn10(g: &mut DataGenerator) -> String {
-    let mut isbn = Vec::with_capacity(10);
-    for _ in 0..9 {
-        isbn.push(g.rng().gen_range(0usize..=9));
-    }
-    let checksum = isbn
-        .iter()
-        .enumerate()
-        .map(|(position, digit)| (digit * (position + 1)))
-        .sum::<usize>()
-        % 11;
-    format!(
-        "{}-{}{}{}-{}{}{}{}{}-{}",
-        isbn[0],
-        isbn[1],
-        isbn[2],
-        isbn[3],
-        isbn[4],
-        isbn[5],
-        isbn[6],
-        isbn[7],
-        isbn[8],
-        if checksum == 10 {
-            'X'
-        } else {
-            char::from_digit(checksum as u32, 10).unwrap()
-        }
-    )
-}
-
-fn random_isbn13(g: &mut DataGenerator) -> String {
-    let mut isbn = Vec::with_capacity(12);
-    isbn.push(9);
-    isbn.push(7);
-    isbn.push(g.rng().gen_range(8..=9));
-    for _ in 0..10 {
-        isbn.push(g.rng().gen_range(0usize..=9));
-    }
-    let checksum = isbn
-        .iter()
-        .enumerate()
-        .map(
-            |(position, digit)| {
-                if position % 2 == 0 { digit } else { digit * 3 }
-            },
-        )
-        .sum::<usize>()
-        % 10;
-    let check_digit = (10 - checksum) % 10;
-    format!(
-        "{}{}{}-{}-{}{}-{}{}{}{}{}{}-{}",
-        isbn[0],
-        isbn[1],
-        isbn[2],
-        isbn[3],
-        isbn[4],
-        isbn[5],
-        isbn[6],
-        isbn[7],
-        isbn[8],
-        isbn[9],
-        isbn[10],
-        isbn[11],
-        check_digit
-    )
-}
-
 strings!(
-PhoneNumber: |g: &mut DataGenerator| g.rng().gen_range(1_000_000..=999_999_999_999_999).to_string();
-UkPhoneNumber: |g: &mut DataGenerator| format!("44{}", g.rng().gen_range(1_000_000_000..=9_999_999_999));
-FrenchPhoneNumber: |g: &mut DataGenerator| format!("33{}", g.rng().gen_range(100_000_000..=999_999_999));
-Email: |g: &mut DataGenerator| format!("{}.{}@{}",
-                                    DataType::FirstName.random(g),
-                                    DataType::LastName.random(g),
-                                    DataType::EmailDomain.random(g));
-FrenchEmail: |g: &mut DataGenerator| format!("{}.{}@{}",
-                                    DataType::FrenchFirstName.random(g),
-                                    DataType::FrenchLastName.random(g),
-                                    DataType::EmailDomain.random(g));
-Address: |g: &mut DataGenerator| format!("{} {} {} {}",
-                                    g.rng().gen_range(1..=999),
-                                    DataType::Street.random(g),
-                                    DataType::City.random(g),
-                                    DataType::Country.random(g),
-                                    );
-UkAddress: |g: &mut DataGenerator| format!("{} {}, {}, {}",
-                                    g.rng().gen_range(1..=999),
-                                    DataType::UkStreet.random(g),
-                                    DataType::UkCity.random(g),
-                                    DataType::UkPostCode.random(g),
-                                    );
-FrenchAddress: |g: &mut DataGenerator| format!("{} {}, {}, {}",
-                                    g.rng().gen_range(1..=999),
-                                    DataType::FrenchStreet.random(g),
-                                    DataType::FrenchCounty.random(g),
-                                    DataType::FrenchPostCode.random(g),
-                                    );
-UkPostCode: |g: &mut DataGenerator| format!("{}{}{} {}{}{}",
-                                    DataType::UkAreaCode.random(g),
-                                    g.rng().gen_range(1..=9),
-                                    DataType::AlphanumericCapitalChar.random(g),
-                                    g.rng().gen_range(1..=9),
-                                    DataType::CapitalChar.random(g),
-                                    DataType::CapitalChar.random(g),
-                                    );
-FrenchPostCode: |g: &mut DataGenerator| format!("{:02}{:03}",
-                                    g.rng().gen_range(1..=95),
-                                    g.rng().gen_range(1..500));
-LowerChar: |g: &mut DataGenerator| g.rng().gen_range('a'..='z') as char;
-CapitalChar: |g: &mut DataGenerator| g.rng().gen_range('A'..='Z') as char;
-AlphanumericChar: |g: &mut DataGenerator| *b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-                                    .choose(g.rng())
-                                    .unwrap() as char;
-AlphanumericCapitalChar: |g: &mut DataGenerator| *b"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-                                    .choose(g.rng())
-                                    .unwrap() as char;
-Latitude: |g: &mut DataGenerator| g.rng().gen_range(-90.0..=90.0).to_string();
-Longitude: |g: &mut DataGenerator| g.rng().gen_range(-180.0..=180.0).to_string();
-LatitudeLongitude: |g: &mut DataGenerator| format!("{}, {}", DataType::Latitude.random(g), DataType::Longitude.random(g));
-Isbn10: random_isbn10;
-Isbn13: random_isbn13;
-Boolean: |g: &mut DataGenerator| if g.rng().gen_bool(0.5) { "True".to_string() } else { "False".to_string() };
-Digit: |g: &mut DataGenerator| g.rng().gen_range(0..=9).to_string();
-
+Address: address;
+AlphanumericCapitalChar: alphanumeric_capital_char;
+AlphanumericChar: alphanumeric_char;
+Boolean: boolean;
+CapitalChar: CapitalChar;
+Digit: digit;
+Email: email;
+FrenchAddress: french_address;
+FrenchEmail: french_email;
+FrenchPhoneNumber: french_phone_number;
+FrenchPostCode: french_post_code;
+Latitude: latitude;
+LatitudeLongitude: latitude_longitude;
+Longitude: longitude;
+LowerChar: lower_char;
+PhoneNumber: phone_number;
+RandomIsbn10: random_isbn10;
+RandomIsbn13: random_isbn13;
+UkAddress: uk_address;
+UkPhoneNumber: uk_phone_number;
+UkPostCode: uk_post_code;
 ;
 art, ArchitecturalStyle, ARCHITECTURAL_STYLES
 art, LiteraryGenre, LITERARY_GENRES
@@ -231,6 +130,7 @@ france, LongestFrenchRiver, LONGEST_FRENCH_RIVERS
 history, HistoricalBattle, HISTORICAL_BATTLES
 internet, EmailDomain, EMAIL_DOMAINS
 internet, OpenSourceApp, OPEN_SOURCE_APPS
+internet, TopLevelDomain, TOP_LEVEL_DOMAINS
 mythology, MythologicalCreature, MYTHOLOGICAL_CREATURES
 name, FirstName, FIRST_NAMES
 name, FrenchFirstName, FRENCH_FIRST_NAMES

@@ -16,7 +16,7 @@ fn non_empty() {
     let list = DataType::list();
     for data_type in list {
         for _ in 0..1000 {
-            assert!(!generator.random(data_type).is_empty());
+            assert!(!data_type.random(&mut generator).is_empty());
         }
     }
 }
@@ -26,9 +26,11 @@ fn uniquessness() {
     let list = DataType::list();
     for data_type in list {
         let mut set = HashSet::new();
-        for value in data_type.values() {
-            if !set.insert(value) {
-                panic!("duplicate value: {value}");
+        if let Some(values) = data_type.values() {
+            for value in values {
+                if !set.insert(value) {
+                    panic!("duplicate value: {value}");
+                }
             }
         }
     }
