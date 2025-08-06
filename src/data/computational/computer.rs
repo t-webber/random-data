@@ -1,4 +1,4 @@
-use rand::Rng;
+use rand::{Rng, seq::IndexedRandom as _};
 
 use crate::{DataGenerator, DataType};
 
@@ -19,19 +19,14 @@ pub fn semver_stable(generator: &mut DataGenerator) -> String {
     )
 }
 
-#[expect(clippy::unreachable, reason = "it is unreachable")]
+#[expect(clippy::unwrap_used, reason = "array not empty")]
 pub fn semver_unstable(generator: &mut DataGenerator) -> String {
     format!(
         "{}-{}{}",
         DataType::SemverStable.random(generator),
-        match generator.rng().random_range(0..5) {
-            0 => "alpha",
-            1 => "beta",
-            2 => "rc",
-            3 => "nightly",
-            4 => "dev",
-            _ => unreachable!(),
-        },
+        ["alpha", "beta", "rc", "nightly", "dev"]
+            .choose(generator.rng())
+            .unwrap(),
         if generator.rng().random_bool(0.9) {
             format!(".{}", generator.rng().random_range(0..20))
         } else {
@@ -90,4 +85,20 @@ pub fn dir_path(generator: &mut DataGenerator) -> String {
         output.push('/');
     }
     output
+}
+
+pub fn file_name(generator: &mut DataGenerator) -> String {
+    format!(
+        "{}.{}",
+        DataType::Word.random(generator),
+        DataType::FileExtension.random(generator)
+    )
+}
+
+pub fn file_path(generator: &mut DataGenerator) -> String {
+    format!(
+        "{}{}",
+        DataType::DirPath.random(generator),
+        DataType::FileName.random(generator)
+    )
 }

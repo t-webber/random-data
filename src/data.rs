@@ -140,6 +140,9 @@ address, LatitudeLongitude, latitude_longitude
 address, Longitude, longitude
 address, UkAddress, uk_address
 address, UkPostCode, uk_post_code
+computer, DirPath, dir_path
+computer, FileName, file_name
+computer, FilePath, file_path
 computer, Ipv4, ipv4
 computer, Ipv6, ipv6
 computer, MacAddress, mac_address
@@ -151,14 +154,17 @@ finance, Iban, iban
 finance, Isin, isin
 isbn, RandomIsbn10, random_isbn10
 isbn, RandomIsbn13, random_isbn13
+personal, CreditCard, credit_card
 personal, Email, email
 personal, FrenchEmail, french_email
+personal, FrenchLicencePlate, french_licence_plate
 personal, FrenchPhoneNumber, french_phone_number
 personal, NhsNumber, nhs_number
 personal, Password, password
 personal, PhoneNumber, phone_number
 personal, SecuriteSociale, securite_sociale
 personal, Sentence, sentence
+personal, UkLicencePlate, uk_licence_plate
 personal, UkPhoneNumber, uk_phone_number
 primitive, AlphanumericCapitalChar, alphanumeric_capital_char
 primitive, AlphanumericChar, alphanumeric_char
@@ -214,6 +220,7 @@ people, Physician, PHYSICIANS
 people, Biologist, BIOLOGISTS
 people, ComputerScientist, COMPUTER_SCIENTISTS
 people, Philosopher, PHILOSOPHERS
+programming, FileExtension, FILE_EXTENSIONS
 programming, ProgrammingLanguage, PROGRAMMING_LANGUAGES
 programming, ProgrammingParadigm, PROGRAMMING_PARADIGMS
 programming, EditorColourTheme, EDITOR_COLOUR_THEMES

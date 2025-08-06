@@ -509,7 +509,7 @@ pub const IT_DOMAINS: &[&str] = &[
     "Web Services",
 ];
 
-pub const KNOWN_EXTENSIONS: &[&str] = &[
+pub const FILE_EXTENSIONS: &[&str] = &[
     "3dm",
     "3ds",
     "3g2",

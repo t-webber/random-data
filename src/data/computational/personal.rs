@@ -1,6 +1,6 @@
 use core::iter::repeat_with;
 
-use rand::Rng as _;
+use rand::Rng;
 
 use crate::{DataGenerator, DataType};
 
@@ -114,4 +114,52 @@ pub fn sentence(generator: &mut DataGenerator) -> String {
     output.push_str(&DataType::Word.random(generator));
     output.push('.');
     output
+}
+
+pub fn credit_card(generator: &mut DataGenerator) -> String {
+    let len = generator.rng().random_range(12..19);
+    let mut output = String::new();
+    let mut checksum = 0i32;
+    for i in 0u32..len {
+        let digit = generator.rng().random_range(0i32..=9i32);
+        output.push_str(&digit.to_string());
+        if (i + len) & 1 == 0 {
+            let double = digit * 2i32;
+            checksum += if double > 9i32 { double - 9i32 } else { double };
+        } else {
+            checksum += digit;
+        }
+    }
+    output.push_str(&(-checksum).rem_euclid(10).to_string());
+    output
+}
+
+pub fn french_licence_plate(generator: &mut DataGenerator) -> String {
+    format!(
+        "{}{}-{}{}{}-{}{}",
+        DataType::CapitalChar.random(generator),
+        DataType::CapitalChar.random(generator),
+        generator.rng().random_range(0..=9u32),
+        generator.rng().random_range(0..=9u32),
+        generator.rng().random_range(0..=9u32),
+        DataType::CapitalChar.random(generator),
+        DataType::CapitalChar.random(generator),
+    )
+}
+
+pub fn uk_licence_plate(generator: &mut DataGenerator) -> String {
+    let range = if generator.rng().random_bool(0.5) {
+        1..25
+    } else {
+        51..75u32
+    };
+    format!(
+        "{}{}{:02}{}{}{}",
+        DataType::CapitalChar.random(generator),
+        DataType::CapitalChar.random(generator),
+        generator.rng().random_range(range),
+        DataType::CapitalChar.random(generator),
+        DataType::CapitalChar.random(generator),
+        DataType::CapitalChar.random(generator),
+    )
 }

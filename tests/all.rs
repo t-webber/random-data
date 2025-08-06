@@ -8,6 +8,9 @@ fn string() {
     for data_type in list {
         assert!(DataType::try_from(&data_type.to_string()).unwrap() == *data_type);
     }
+
+    assert!(DataType::try_from("invalid_string").is_err());
+    assert!(DataType::try_from("").is_err());
 }
 
 #[test]

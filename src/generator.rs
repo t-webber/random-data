@@ -12,7 +12,6 @@ impl DataGenerator {
         Self::default()
     }
 
-    #[inline]
     pub(crate) const fn rng(&mut self) -> &mut ThreadRng {
         &mut self.0
     }
