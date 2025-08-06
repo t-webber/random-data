@@ -1,29 +1,30 @@
-use rand::Rng;
+use rand::Rng as _;
 
 use crate::{DataGenerator, DataType};
 
-pub fn semver(g: &mut DataGenerator) -> String {
-    if g.rng().random_bool(0.8) {
-        DataType::SemverStable.random(g)
+pub fn semver(generator: &mut DataGenerator) -> String {
+    if generator.rng().random_bool(0.8) {
+        DataType::SemverStable.random(generator)
     } else {
-        DataType::SemverUnstable.random(g)
+        DataType::SemverUnstable.random(generator)
     }
 }
 
-pub fn semver_stable(g: &mut DataGenerator) -> String {
+pub fn semver_stable(generator: &mut DataGenerator) -> String {
     format!(
         "{}.{}.{}",
-        g.rng().random_range(0..20),
-        g.rng().random_range(1..20),
-        g.rng().random_range(0..20)
+        generator.rng().random_range(0..20),
+        generator.rng().random_range(1..20),
+        generator.rng().random_range(0..20)
     )
 }
 
-pub fn semver_unstable(g: &mut DataGenerator) -> String {
+#[expect(clippy::unreachable, reason = "it is unreachable")]
+pub fn semver_unstable(generator: &mut DataGenerator) -> String {
     format!(
         "{}-{}{}",
-        DataType::SemverStable.random(g),
-        match g.rng().random_range(0..5) {
+        DataType::SemverStable.random(generator),
+        match generator.rng().random_range(0..5) {
             0 => "alpha",
             1 => "beta",
             2 => "rc",
@@ -31,53 +32,52 @@ pub fn semver_unstable(g: &mut DataGenerator) -> String {
             4 => "dev",
             _ => unreachable!(),
         },
-        if g.rng().random_bool(0.9) {
-            format!(".{}", g.rng().random_range(0..20))
+        if generator.rng().random_bool(0.9) {
+            format!(".{}", generator.rng().random_range(0..20))
         } else {
             String::new()
         }
     )
 }
 
-pub fn mac_address(g: &mut DataGenerator) -> String {
-    let r = |g: &mut DataGenerator| g.rng().random_range(0..16);
+pub fn mac_address(generator: &mut DataGenerator) -> String {
     format!(
         "{:X}{:X}:{:X}{:X}:{:X}{:X}:{:X}{:X}:{:X}{:X}:{:X}{:X}",
-        g.rng().random_range(0..16),
-        g.rng().random_range(0..16),
-        g.rng().random_range(0..16),
-        g.rng().random_range(0..16),
-        g.rng().random_range(0..16),
-        g.rng().random_range(0..16),
-        g.rng().random_range(0..16),
-        g.rng().random_range(0..16),
-        g.rng().random_range(0..16),
-        g.rng().random_range(0..16),
-        g.rng().random_range(0..16),
-        g.rng().random_range(0..16),
+        generator.rng().random_range(0..16),
+        generator.rng().random_range(0..16),
+        generator.rng().random_range(0..16),
+        generator.rng().random_range(0..16),
+        generator.rng().random_range(0..16),
+        generator.rng().random_range(0..16),
+        generator.rng().random_range(0..16),
+        generator.rng().random_range(0..16),
+        generator.rng().random_range(0..16),
+        generator.rng().random_range(0..16),
+        generator.rng().random_range(0..16),
+        generator.rng().random_range(0..16),
     )
 }
 
-pub fn ipv4(g: &mut DataGenerator) -> String {
+pub fn ipv4(generator: &mut DataGenerator) -> String {
     format!(
         "{}.{}.{}.{}",
-        g.rng().random_range(0..=255),
-        g.rng().random_range(0..=255),
-        g.rng().random_range(0..=255),
-        g.rng().random_range(0..=255),
+        generator.rng().random_range(0..=255),
+        generator.rng().random_range(0..=255),
+        generator.rng().random_range(0..=255),
+        generator.rng().random_range(0..=255),
     )
 }
 
-pub fn ipv6(g: &mut DataGenerator) -> String {
+pub fn ipv6(generator: &mut DataGenerator) -> String {
     format!(
         "{:X}:{:X}:{:X}:{:X}:{:X}:{:X}:{:X}:{:X}",
-        g.rng().random_range(0..=0xffff),
-        g.rng().random_range(0..=0xffff),
-        g.rng().random_range(0..=0xffff),
-        g.rng().random_range(0..=0xffff),
-        g.rng().random_range(0..=0xffff),
-        g.rng().random_range(0..=0xffff),
-        g.rng().random_range(0..=0xffff),
-        g.rng().random_range(0..=0xffff),
+        generator.rng().random_range(0..=0xffff),
+        generator.rng().random_range(0..=0xffff),
+        generator.rng().random_range(0..=0xffff),
+        generator.rng().random_range(0..=0xffff),
+        generator.rng().random_range(0..=0xffff),
+        generator.rng().random_range(0..=0xffff),
+        generator.rng().random_range(0..=0xffff),
+        generator.rng().random_range(0..=0xffff),
     )
 }

@@ -1,37 +1,40 @@
 use rand::{Rng as _, seq::IndexedRandom as _};
 
-use crate::{DataGenerator, DataType};
+use crate::DataGenerator;
 
-pub fn lower_char(g: &mut DataGenerator) -> String {
-    g.rng().random_range('a'..='z').to_string()
+pub fn lower_char(generator: &mut DataGenerator) -> String {
+    generator.rng().random_range('a'..='z').to_string()
 }
 
-pub fn capital_char(g: &mut DataGenerator) -> String {
-    g.rng().random_range('A'..='Z').to_string()
+pub fn capital_char(generator: &mut DataGenerator) -> String {
+    generator.rng().random_range('A'..='Z').to_string()
 }
 
-pub fn alphanumeric_char(g: &mut DataGenerator) -> String {
+#[expect(clippy::unwrap_used, reason = "non empty string")]
+pub fn alphanumeric_char(generator: &mut DataGenerator) -> String {
     (*b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-        .choose(g.rng())
+        .choose(generator.rng())
         .unwrap() as char)
         .to_string()
 }
 
-pub fn alphanumeric_capital_char(g: &mut DataGenerator) -> String {
+#[expect(clippy::unwrap_used, reason = "non empty string")]
+pub fn alphanumeric_capital_char(generator: &mut DataGenerator) -> String {
     (*b"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        .choose(g.rng())
+        .choose(generator.rng())
         .unwrap() as char)
         .to_string()
 }
 
-pub fn boolean(g: &mut DataGenerator) -> String {
-    if g.rng().gen_bool(0.5) {
-        "True".to_string()
+pub fn boolean(generator: &mut DataGenerator) -> String {
+    if generator.rng().random_bool(0.5) {
+        "True"
     } else {
-        "False".to_string()
+        "False"
     }
+    .to_owned()
 }
 
-pub fn digit(g: &mut DataGenerator) -> String {
-    g.rng().random_range(0..=9).to_string()
+pub fn digit(generator: &mut DataGenerator) -> String {
+    generator.rng().random_range(0..=9).to_string()
 }

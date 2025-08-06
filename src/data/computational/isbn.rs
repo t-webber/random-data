@@ -2,17 +2,23 @@ use rand::Rng as _;
 
 use crate::DataGenerator;
 
-pub fn random_isbn10(g: &mut DataGenerator) -> String {
+#[expect(clippy::indexing_slicing, reason = "index in bounds")]
+#[expect(
+    clippy::cast_possible_truncation,
+    clippy::unwrap_used,
+    reason = "small enough"
+)]
+pub fn random_isbn10(generator: &mut DataGenerator) -> String {
     let mut isbn = Vec::with_capacity(10);
-    for _ in 0..9 {
-        isbn.push(g.rng().random_range(0usize..=9));
+    for _ in 0..9u32 {
+        isbn.push(generator.rng().random_range(0usize..=9));
     }
     let checksum = isbn
         .iter()
         .enumerate()
-        .map(|(position, digit)| (digit * (position + 1)))
+        .map(|(position, digit)| digit * (position + 1))
         .sum::<usize>()
-        % 11;
+        .rem_euclid(11);
     format!(
         "{}-{}{}{}-{}{}{}{}{}-{}",
         isbn[0],
@@ -32,25 +38,26 @@ pub fn random_isbn10(g: &mut DataGenerator) -> String {
     )
 }
 
-pub fn random_isbn13(g: &mut DataGenerator) -> String {
+#[expect(clippy::indexing_slicing, reason = "index in bounds")]
+pub fn random_isbn13(generator: &mut DataGenerator) -> String {
     let mut isbn = Vec::with_capacity(12);
     isbn.push(9);
     isbn.push(7);
-    isbn.push(g.rng().random_range(8..=9));
-    for _ in 0..10 {
-        isbn.push(g.rng().random_range(0usize..=9));
+    isbn.push(generator.rng().random_range(8..=9));
+    for _ in 0u32..10 {
+        isbn.push(generator.rng().random_range(0usize..=9));
     }
     let checksum = isbn
         .iter()
         .enumerate()
         .map(
             |(position, digit)| {
-                if position % 2 == 0 { *digit } else { digit * 3 }
+                if position & 1 == 0 { *digit } else { digit * 3 }
             },
         )
         .sum::<usize>()
-        % 10;
-    let check_digit = (10 - checksum) % 10;
+        .rem_euclid(10);
+    let check_digit = (10 - checksum).rem_euclid(10);
     format!(
         "{}{}{}-{}-{}{}-{}{}{}{}{}{}-{}",
         isbn[0],

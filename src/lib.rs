@@ -1,6 +1,6 @@
 //! Generate random data of any kind.
 
-#![allow(
+#![warn(
     bindings_with_variant_name,
     non_snake_case,
     missing_docs,
@@ -26,14 +26,26 @@
     clippy::nursery,
     clippy::cargo
 )]
-// #![expect(clippy::blanket_clippy_restriction_lints, reason = "enable all lints")]
-// #![allow(clippy::missing_docs_in_private_items, reason = "explicit names")]
-// #![expect(clippy::non_ascii_literal, reason = "not-understandable")]
-// #![expect(clippy::self_named_module_files, reason = "style choice")]
-
-use std::ops::Range;
-
-pub use crate::{data::DataType, generator::DataGenerator};
+#![expect(clippy::blanket_clippy_restriction_lints, reason = "enable all lints")]
+#![allow(clippy::missing_docs_in_private_items, reason = "explicit names")]
+#![expect(clippy::non_ascii_literal, reason = "not-understandable")]
+#![expect(clippy::self_named_module_files, reason = "style choice")]
+#![expect(clippy::pub_use, reason = "simpler and more robust API")]
+#![expect(
+    clippy::single_call_fn,
+    clippy::pattern_type_mismatch,
+    clippy::module_name_repetitions,
+    clippy::implicit_return,
+    reason = "bad lint"
+)]
+#![expect(clippy::unseparated_literal_suffix, reason = "chosen style")]
+#![allow(clippy::missing_inline_in_public_items, reason = "bad lint")]
+#![expect(
+    clippy::arithmetic_side_effects,
+    clippy::as_conversions,
+    reason = "numbers are small"
+)]
 
 mod data;
 mod generator;
+pub use crate::{data::DataType, generator::DataGenerator};

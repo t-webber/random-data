@@ -1,13 +1,14 @@
 mod computational;
 mod raw;
-use crate::data::computational::*;
-use crate::data::raw::*;
+extern crate alloc;
+use crate::data::computational::{address, computer, finance, isbn, personal, primitive};
+use crate::data::raw::{
+    art, colour, currency, datetime, fauna, france, history, internet, mythology, name, people,
+    programming, science, space, sport, uk, university, us, weather, words, work, world,
+};
 use crate::generator::DataGenerator;
-use rand::Rng as _;
-use rand::rngs::ThreadRng;
-use rand::seq::IndexedRandom;
-use rand::seq::SliceRandom;
-use std::fmt;
+use alloc::fmt;
+use rand::seq::IndexedRandom as _;
 
 macro_rules! strings {
     ($($fn_module:ident, $fn_variant:ident, $fn_func:ident)*;  $($list_module:ident, $list_variant:ident, $list_const:ident)*) => {
@@ -20,27 +21,46 @@ macro_rules! strings {
             ///
             /// ```
             /// use random_data::*;
-            /// let mut g = DataGenerator::new();
+            /// let mut generator = DataGenerator::new();
             ///
-            /// let random_month = DataType::Month.random(&mut g);
+            /// let random_month = DataType::Month.random(&mut generator);
             /// println!("{random_month}");
             ///
-            /// let random_address = DataType::Address.random(&mut g);
+            /// let random_address = DataType::Address.random(&mut generator);
             /// println!("{random_address}");
             /// ```
         #[non_exhaustive]
         #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone)]
+        #[expect(clippy::arbitrary_source_item_ordering, reason="ordered by type")]
+        #[expect(missing_docs, reason="macro produced")]
         pub enum DataType {
             $($fn_variant,)*
             $($list_variant,)*
         }
 
         impl DataType {
-            /// List of all the available data types.
             const LIST: &[Self] = &[
                 $(Self::$fn_variant,)*
                 $(Self::$list_variant,)*
             ];
+
+            /// Generate a random value of the according [`DataType`]
+            ///
+            /// # Examples
+            ///
+            /// ```
+            /// use random_data::*;
+            /// let mut generator = DataGenerator::new();
+            ///
+            /// let random_address = DataType::Address.random(&mut generator);
+            /// println!("{random_address}");
+            /// ```
+            pub fn random(&self, generator: &mut DataGenerator) -> String {
+                match self {
+                    $( DataType::$fn_variant => $fn_module::$fn_func(generator), )*
+                    $( DataType::$list_variant => ($list_module::$list_const).choose(generator.rng()).unwrap().to_string(),)*
+                }
+            }
 
             /// Returns the list of possible values of a data type if applicable
             ///
@@ -53,38 +73,21 @@ macro_rules! strings {
             ///
             /// ```
             /// use random_data::*;
-            /// let mut g = DataGenerator::new();
+            /// let mut generator = DataGenerator::new();
             ///
-            /// let month = DataType::Month.random(&mut g);
+            /// let month = DataType::Month.random(&mut generator);
             /// let all_months = DataType::Month.values().unwrap();
             /// assert!(all_months.contains(&month.as_ref()));
             ///
             /// assert!(DataType::Address.values().is_none());
             /// ```
-            pub fn values(&self) -> Option<&'static[&'static str]> {
+            pub const fn values(&self) -> Option<&'static[&'static str]> {
                 match self {
                     $( Self::$list_variant => Some(&$list_module::$list_const),)*
                         _ => None
                 }
             }
 
-            /// Generate a random value of the according [`DataType`]
-            ///
-            /// # Examples
-            ///
-            /// ```
-            /// use random_data::*;
-            /// let mut g = DataGenerator::new();
-            ///
-            /// let random_address = DataType::Address.random(&mut g);
-            /// println!("{random_address}");
-            /// ```
-            pub fn random(&self, g: &mut DataGenerator) -> String {
-                match self {
-                    $( DataType::$fn_variant => $fn_module::$fn_func(g), )*
-                    $( DataType::$list_variant => ($list_module::$list_const).choose(g.rng()).unwrap().to_string(),)*
-                }
-            }
         }
 
         impl TryFrom<&str> for DataType {
@@ -104,11 +107,15 @@ macro_rules! strings {
 }
 
 impl DataType {
+    /// List of all the available data types.
+    #[must_use]
     pub const fn list() -> &'static [Self] {
         Self::LIST
     }
 }
 
+#[expect(clippy::use_debug, reason = "fine here")]
+#[expect(clippy::min_ident_chars, reason = "follow trait naming patterns")]
 impl fmt::Display for DataType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{self:?}")
@@ -139,12 +146,17 @@ computer, MacAddress, mac_address
 computer, Semver, semver
 computer, SemverStable, semver_stable
 computer, SemverUnstable, semver_unstable
+finance, Bic, bic
+finance, Iban, iban
+finance, Isin, isin
 isbn, RandomIsbn10, random_isbn10
 isbn, RandomIsbn13, random_isbn13
 personal, Email, email
 personal, FrenchEmail, french_email
 personal, FrenchPhoneNumber, french_phone_number
+personal, NhsNumber, nhs_number
 personal, PhoneNumber, phone_number
+personal, SecuriteSociale, securite_sociale
 personal, UkPhoneNumber, uk_phone_number
 primitive, AlphanumericCapitalChar, alphanumeric_capital_char
 primitive, AlphanumericChar, alphanumeric_char
@@ -227,6 +239,7 @@ us, AmericanState, AMERICAN_STATES
 us, UsRoads, US_ROADS
 us, UsRoadTypes, US_ROAD_TYPES
 weather, TypesOfCloud, TYPES_OF_CLOUDS
+words, Word, WORDS
 work, CarBrand, CAR_BRANDS
 work, CompanyName, COMPANY_NAMES
 work, Job, JOBS

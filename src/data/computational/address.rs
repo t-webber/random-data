@@ -2,68 +2,68 @@ use rand::Rng as _;
 
 use crate::{DataGenerator, DataType};
 
-pub fn address(g: &mut DataGenerator) -> String {
+pub fn address(generator: &mut DataGenerator) -> String {
     format!(
         "{} {} {} {}",
-        g.rng().random_range(1..=999),
-        DataType::Street.random(g),
-        DataType::City.random(g),
-        DataType::Country.random(g),
+        generator.rng().random_range(1..=999),
+        DataType::Street.random(generator),
+        DataType::City.random(generator),
+        DataType::Country.random(generator),
     )
 }
 
-pub fn uk_address(g: &mut DataGenerator) -> String {
+pub fn uk_address(generator: &mut DataGenerator) -> String {
     format!(
         "{} {}, {}, {}",
-        g.rng().random_range(1..=999),
-        DataType::UkStreet.random(g),
-        DataType::UkCity.random(g),
-        DataType::UkPostCode.random(g),
+        generator.rng().random_range(1..=999),
+        DataType::UkStreet.random(generator),
+        DataType::UkCity.random(generator),
+        DataType::UkPostCode.random(generator),
     )
 }
 
-pub fn french_address(g: &mut DataGenerator) -> String {
+pub fn french_address(generator: &mut DataGenerator) -> String {
     format!(
         "{} {}, {}, {}",
-        g.rng().random_range(1..=999),
-        DataType::FrenchStreet.random(g),
-        DataType::FrenchCounty.random(g),
-        DataType::FrenchPostCode.random(g),
+        generator.rng().random_range(1..=999),
+        DataType::FrenchStreet.random(generator),
+        DataType::FrenchCounty.random(generator),
+        DataType::FrenchPostCode.random(generator),
     )
 }
 
-pub fn uk_post_code(g: &mut DataGenerator) -> String {
+pub fn uk_post_code(generator: &mut DataGenerator) -> String {
     format!(
         "{}{}{} {}{}{}",
-        DataType::UkPostcodeArea.random(g),
-        g.rng().random_range(1..=9),
-        DataType::AlphanumericCapitalChar.random(g),
-        g.rng().random_range(1..=9),
-        DataType::CapitalChar.random(g),
-        DataType::CapitalChar.random(g),
+        DataType::UkPostcodeArea.random(generator),
+        generator.rng().random_range(1..=9),
+        DataType::AlphanumericCapitalChar.random(generator),
+        generator.rng().random_range(1..=9),
+        DataType::CapitalChar.random(generator),
+        DataType::CapitalChar.random(generator),
     )
 }
 
-pub fn french_post_code(g: &mut DataGenerator) -> String {
+pub fn french_post_code(generator: &mut DataGenerator) -> String {
     format!(
         "{:02}{:03}",
-        g.rng().random_range(1..=95),
-        g.rng().random_range(1..500)
+        generator.rng().random_range(1..=95),
+        generator.rng().random_range(1..500)
     )
 }
 
-pub fn latitude(g: &mut DataGenerator) -> String {
-    g.rng().random_range(-90.0..=90.0).to_string()
+pub fn latitude(generator: &mut DataGenerator) -> String {
+    generator.rng().random_range(-90.0..=90.0).to_string()
 }
 
-pub fn longitude(g: &mut DataGenerator) -> String {
-    g.rng().random_range(-180.0..=180.0).to_string()
+pub fn longitude(generator: &mut DataGenerator) -> String {
+    generator.rng().random_range(-180.0..=180.0).to_string()
 }
 
-pub fn latitude_longitude(g: &mut DataGenerator) -> String {
+pub fn latitude_longitude(generator: &mut DataGenerator) -> String {
     format!(
         "{}, {}",
-        DataType::Latitude.random(g),
-        DataType::Longitude.random(g)
+        DataType::Latitude.random(generator),
+        DataType::Longitude.random(generator)
     )
 }
