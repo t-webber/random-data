@@ -133,6 +133,9 @@ address, LatitudeLongitude, latitude_longitude
 address, Longitude, longitude
 address, UkAddress, uk_address
 address, UkPostCode, uk_post_code
+computer, Ipv4, ipv4
+computer, Ipv6, ipv6
+computer, MacAddress, mac_address
 computer, Semver, semver
 computer, SemverStable, semver_stable
 computer, SemverUnstable, semver_unstable

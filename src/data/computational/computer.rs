@@ -9,6 +9,7 @@ pub fn semver(g: &mut DataGenerator) -> String {
         DataType::SemverUnstable.random(g)
     }
 }
+
 pub fn semver_stable(g: &mut DataGenerator) -> String {
     format!(
         "{}.{}.{}",
@@ -17,6 +18,7 @@ pub fn semver_stable(g: &mut DataGenerator) -> String {
         g.rng().random_range(0..20)
     )
 }
+
 pub fn semver_unstable(g: &mut DataGenerator) -> String {
     format!(
         "{}-{}{}",
@@ -34,5 +36,48 @@ pub fn semver_unstable(g: &mut DataGenerator) -> String {
         } else {
             String::new()
         }
+    )
+}
+
+pub fn mac_address(g: &mut DataGenerator) -> String {
+    let r = |g: &mut DataGenerator| g.rng().random_range(0..16);
+    format!(
+        "{:X}{:X}:{:X}{:X}:{:X}{:X}:{:X}{:X}:{:X}{:X}:{:X}{:X}",
+        g.rng().random_range(0..16),
+        g.rng().random_range(0..16),
+        g.rng().random_range(0..16),
+        g.rng().random_range(0..16),
+        g.rng().random_range(0..16),
+        g.rng().random_range(0..16),
+        g.rng().random_range(0..16),
+        g.rng().random_range(0..16),
+        g.rng().random_range(0..16),
+        g.rng().random_range(0..16),
+        g.rng().random_range(0..16),
+        g.rng().random_range(0..16),
+    )
+}
+
+pub fn ipv4(g: &mut DataGenerator) -> String {
+    format!(
+        "{}.{}.{}.{}",
+        g.rng().random_range(0..=255),
+        g.rng().random_range(0..=255),
+        g.rng().random_range(0..=255),
+        g.rng().random_range(0..=255),
+    )
+}
+
+pub fn ipv6(g: &mut DataGenerator) -> String {
+    format!(
+        "{:X}:{:X}:{:X}:{:X}:{:X}:{:X}:{:X}:{:X}",
+        g.rng().random_range(0..=0xffff),
+        g.rng().random_range(0..=0xffff),
+        g.rng().random_range(0..=0xffff),
+        g.rng().random_range(0..=0xffff),
+        g.rng().random_range(0..=0xffff),
+        g.rng().random_range(0..=0xffff),
+        g.rng().random_range(0..=0xffff),
+        g.rng().random_range(0..=0xffff),
     )
 }
