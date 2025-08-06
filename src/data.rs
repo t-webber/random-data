@@ -34,10 +34,16 @@ macro_rules! strings {
         }
 
         impl DataType {
-            const LIST: &[Self] = &[
+            const STRINGS_LIST: &[&str] = &[
+                $(stringify!($fn_variant),)*
+                $(stringify!($list_variant),)*
+            ];
+
+            const TYPES_LIST: &[Self] = &[
                 $(Self::$fn_variant,)*
                 $(Self::$list_variant,)*
             ];
+
 
             /// Generate a random value of the according [`DataType`]
             ///
@@ -105,7 +111,13 @@ impl DataType {
     /// List of all the available data types.
     #[must_use]
     pub const fn list() -> &'static [Self] {
-        Self::LIST
+        Self::TYPES_LIST
+    }
+
+    /// List of all the available data types, in string format.
+    #[must_use]
+    pub const fn list_str() -> &'static [&'static str] {
+        Self::STRINGS_LIST
     }
 }
 

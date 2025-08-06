@@ -14,6 +14,13 @@ fn string() {
 }
 
 #[test]
+fn list() {
+    for (i, repr) in DataType::list_str().iter().enumerate() {
+        assert_eq!(*repr, DataType::list()[i].to_string().as_str());
+    }
+}
+
+#[test]
 fn non_empty() {
     let mut generator = DataGenerator::new();
     let list = dbg!(DataType::list());
