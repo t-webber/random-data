@@ -1,3 +1,8 @@
+pub const NAME_TITLES: [&str; 16] = [
+    "Mr", "Mrs", "Miss", "Ms", "Dr", "Prof", "Sir", "Lady", "Lord", "Dame", "Rev", "Capt", "Col",
+    "Maj", "Hon", "Sen",
+];
+
 pub const FIRST_NAMES: &[&str] = &[
     "Aaron",
     "Albert",

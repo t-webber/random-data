@@ -195,7 +195,7 @@ pub const COUNTRIES: &[&str] = &[
     "Zimbabwe",
 ];
 
-pub const MOST_POPULATED_CITIES: &[&str] = &[
+pub const CITIES: &[&str] = &[
     "Addis Ababa",
     "Agra",
     "Ahmedabad",
@@ -425,7 +425,7 @@ pub const COUNTRY_CODES: &[&str] = &[
     "VN", "VU", "WF", "WS", "YE", "YT", "ZA", "ZM", "ZW",
 ];
 
-pub const WORLD_STREETS: &[&str] = &[
+pub const STREETS: &[&str] = &[
     "Abbey Road",
     "Avenida Paulista",
     "Baker Street",

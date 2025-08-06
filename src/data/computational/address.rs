@@ -35,7 +35,7 @@ pub fn french_address(g: &mut DataGenerator) -> String {
 pub fn uk_post_code(g: &mut DataGenerator) -> String {
     format!(
         "{}{}{} {}{}{}",
-        DataType::UkAreaCode.random(g),
+        DataType::UkPostcodeArea.random(g),
         g.rng().random_range(1..=9),
         DataType::AlphanumericCapitalChar.random(g),
         g.rng().random_range(1..=9),

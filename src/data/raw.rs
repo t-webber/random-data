@@ -17,5 +17,6 @@ pub mod uk;
 pub mod university;
 pub mod us;
 pub mod weather;
+pub mod words;
 pub mod work;
 pub mod world;
