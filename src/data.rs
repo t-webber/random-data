@@ -1,11 +1,6 @@
 mod computational;
 mod raw;
 extern crate alloc;
-use crate::data::computational::{address, computer, finance, isbn, personal, primitive};
-use crate::data::raw::{
-    art, colour, currency, datetime, fauna, france, history, internet, mythology, name, people,
-    programming, science, space, sport, uk, university, us, weather, words, work, world,
-};
 use crate::generator::DataGenerator;
 use alloc::fmt;
 use rand::seq::IndexedRandom as _;
@@ -57,8 +52,8 @@ macro_rules! strings {
             /// ```
             pub fn random(&self, generator: &mut DataGenerator) -> String {
                 match self {
-                    $( DataType::$fn_variant => $fn_module::$fn_func(generator), )*
-                    $( DataType::$list_variant => ($list_module::$list_const).choose(generator.rng()).unwrap().to_string(),)*
+                    $( DataType::$fn_variant => crate::data::computational::$fn_module::$fn_func(generator), )*
+                    $( DataType::$list_variant => (crate::data::raw::$list_module::$list_const).choose(generator.rng()).unwrap().to_string(),)*
                 }
             }
 
@@ -83,7 +78,7 @@ macro_rules! strings {
             /// ```
             pub const fn values(&self) -> Option<&'static[&'static str]> {
                 match self {
-                    $( Self::$list_variant => Some(&$list_module::$list_const),)*
+                    $( Self::$list_variant => Some(&crate::data::raw::$list_module::$list_const),)*
                         _ => None
                 }
             }
@@ -140,6 +135,11 @@ address, LatitudeLongitude, latitude_longitude
 address, Longitude, longitude
 address, UkAddress, uk_address
 address, UkPostCode, uk_post_code
+colour, HexColour, hex_colour
+colour, HslaColour, hsla_colour
+colour, HslColour, hsl_colour
+colour, RgbaColour, rgba_colour
+colour, RgbColour, rgb_colour
 computer, DirPath, dir_path
 computer, FileName, file_name
 computer, FilePath, file_path
@@ -204,8 +204,11 @@ france, FrenchCounty, FRENCH_COUNTIES
 france, LongestFrenchRiver, LONGEST_FRENCH_RIVERS
 history, HistoricalBattle, HISTORICAL_BATTLES
 internet, EmailDomain, EMAIL_DOMAINS
+internet, HttpStatusCode, HTTP_STATUS_CODES
+internet, MimeType, MIME_TYPES
 internet, OpenSourceApp, OPEN_SOURCE_APPS
 internet, TopLevelDomain, TOP_LEVEL_DOMAINS
+internet, UserAgent, USER_AGENTS
 mythology, MythologicalCreature, MYTHOLOGICAL_CREATURES
 name, FirstName, FIRST_NAMES
 name, FrenchFirstName, FRENCH_FIRST_NAMES

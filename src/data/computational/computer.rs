@@ -1,4 +1,4 @@
-use rand::{Rng, seq::IndexedRandom as _};
+use rand::{Rng as _, seq::IndexedRandom as _};
 
 use crate::{DataGenerator, DataType};
 

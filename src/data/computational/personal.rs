@@ -1,6 +1,6 @@
 use core::iter::repeat_with;
 
-use rand::Rng;
+use rand::Rng as _;
 
 use crate::{DataGenerator, DataType};
 
