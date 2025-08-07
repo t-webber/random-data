@@ -116,6 +116,17 @@ pub fn sentence(generator: &mut DataGenerator) -> String {
     output
 }
 
+pub fn paragraph(generator: &mut DataGenerator) -> String {
+    let mut output = String::new();
+    let len = generator.rng().random_range(5..10);
+    for _ in 0u32..len {
+        output.push_str(&DataType::Sentence.random(generator));
+        output.push(' ');
+    }
+    output.push_str(&DataType::Sentence.random(generator));
+    output
+}
+
 pub fn credit_card(generator: &mut DataGenerator) -> String {
     let len = generator.rng().random_range(12..19);
     let mut output = String::new();

@@ -82,6 +82,7 @@ macro_rules! strings {
             ///
             /// assert!(DataType::Address.values().is_none());
             /// ```
+            #[must_use]
             pub const fn values(&self) -> Option<&'static[&'static str]> {
                 match self {
                     $( Self::$list_variant => Some(&crate::data::raw::$list_module::$list_const),)*
@@ -176,6 +177,7 @@ personal, Password, password
 personal, PhoneNumber, phone_number
 personal, SecuriteSociale, securite_sociale
 personal, Sentence, sentence
+personal, Paragraph, paragraph
 personal, UkLicencePlate, uk_licence_plate
 personal, UkPhoneNumber, uk_phone_number
 primitive, AlphanumericCapitalChar, alphanumeric_capital_char
@@ -205,7 +207,7 @@ fauna, Animal, ANIMALS
 fauna, Mammal, MAMMALS
 fauna, Bird, BIRDS
 fauna, Insect, INSECTS
-fauna, Fishe, FISHES
+fauna, Fish, FISHES
 fauna, Amphibian, AMPHIBIANS
 fauna, Reptile, REPTILES
 fauna, Mollusc, MOLLUSC
