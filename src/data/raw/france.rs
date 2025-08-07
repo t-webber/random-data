@@ -202,7 +202,7 @@ pub const FRENCH_COUNTIES: &[&str] = &[
     "Yvelines",
 ];
 
-pub const LONGEST_FRENCH_RIVERS: &[&str] = &[
+pub const FRENCH_RIVERS: &[&str] = &[
     "Adour",
     "Aisne",
     "Allier",

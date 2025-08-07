@@ -215,7 +215,7 @@ fauna, AnimalType, ANIMAL_TYPES
 france, FrenchStreet, FRENCH_STREETS
 france, FrenchRoadType, FRENCH_ROAD_TYPES
 france, FrenchCounty, FRENCH_COUNTIES
-france, LongestFrenchRiver, LONGEST_FRENCH_RIVERS
+france, FrenchRiver, FRENCH_RIVERS
 history, HistoricalBattle, HISTORICAL_BATTLES
 internet, EmailDomain, EMAIL_DOMAINS
 internet, HttpStatusCode, HTTP_STATUS_CODES
@@ -254,14 +254,14 @@ uk, UkPostcodeArea, UK_POSTCODE_AREAS
 uk, UkCounty, UK_COUNTIES
 uk, UkCity, UK_CITIES
 uk, UkRoadType, UK_ROAD_TYPES
-uk, LongestUkRiver, LONGEST_UK_RIVERS
+uk, UkRiver, UK_RIVERS
 uk, UkStreet, UK_STREETS
 university, SchoolSubject, SCHOOL_SUBJECTS
 university, AcademicDiscipline, ACADEMIC_DISCIPLINES
 university, DegreesTitle, DEGREES_TITLES
 university, University, UNIVERSITIES
 us, UsStateAbbr, US_STATE_ABBR
-us, AmericanState, AMERICAN_STATES
+us, UsState, US_STATE
 us, UsRoads, US_ROADS
 us, UsRoadTypes, US_ROAD_TYPES
 weather, TypesOfCloud, TYPES_OF_CLOUDS
@@ -274,5 +274,5 @@ world, City, CITIES
 world, Continent, CONTINENTS
 world, CountryCode, COUNTRY_CODES
 world, Street, STREETS
-world, LongestRiver, LONGEST_RIVERS
+world, River, RIVERS
 );

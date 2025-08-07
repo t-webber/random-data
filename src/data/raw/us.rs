@@ -5,7 +5,7 @@ pub const US_STATE_ABBR: &[&str] = &[
     "WI", "WY",
 ];
 
-pub const AMERICAN_STATES: &[&str] = &[
+pub const US_STATES: &[&str] = &[
     "Alabama",
     "Alaska",
     "Arizona",

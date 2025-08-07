@@ -464,7 +464,7 @@ pub const STREETS: &[&str] = &[
     "Yonge Street",
 ];
 
-pub const LONGEST_RIVERS: &[&str] = &[
+pub const RIVERS: &[&str] = &[
     "Amazon",
     "Amur",
     "Congo",

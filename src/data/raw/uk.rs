@@ -164,7 +164,7 @@ pub const UK_ROAD_TYPES: &[&str] = &[
     "Way",
 ];
 
-pub const LONGEST_UK_RIVERS: &[&str] = &[
+pub const UK_RIVERS: &[&str] = &[
     "Afon Conwy",
     "Aire",
     "Aln",
