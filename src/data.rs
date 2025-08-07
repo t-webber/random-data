@@ -261,7 +261,7 @@ university, AcademicDiscipline, ACADEMIC_DISCIPLINES
 university, DegreesTitle, DEGREES_TITLES
 university, University, UNIVERSITIES
 us, UsStateAbbr, US_STATE_ABBR
-us, UsState, US_STATE
+us, UsState, US_STATES
 us, UsRoads, US_ROADS
 us, UsRoadTypes, US_ROAD_TYPES
 weather, TypesOfCloud, TYPES_OF_CLOUDS

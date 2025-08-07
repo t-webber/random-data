@@ -11,26 +11,7 @@ A Rust library for generating realistic random data of any kind.
 
 Checkout the [`random-json`](https://github.com/t-webber/random-json) crate to use this data as a CLI. It let's you choose the data you want with a dropdown dialogue in the terminal, or lets you generate big amounts of data in one go from a JSON schema!
 
-## Features
-
-- **Extensive Data Types**: Over 100 different types of random data including:
-  - **Personal Information**: Names, emails, phone numbers, addresses
-  - **Geographic Data**: Countries, cities, coordinates, postcodes
-  - **Technical Data**: IP addresses, MAC addresses, file paths, semvers, programming languages
-  - **Financial Data**: IBAN, BIC, credit cards, currencies
-  - **Colors**: RGB, HSL, Hex, colors with alpha channels
-  - **Academic**: Universities, subjects, degrees
-  - **And much more**: Animals, planets, famous people, chemical elements, etc.
-
-- **Formula-based and List-based Generation**: Some data is generated using formulas (like addresses, coordinates), while others are randomly selected from lists of read-data values (like animal names, countries, companies) for the data to be as real as possible.
-
-- **Locale Support** (limited): Some generators exist for different regions (UK, France, US)
-
-- **Simple API**: Easy-to-use interface with a single `DataType` enum, and a single `random` method.
-
-- **No External Dependencies**: Only depends on the `rand` crate for randomisation
-
-## Quick Start
+## Installation
 
 ```bash
 cargo add random-data
@@ -117,31 +98,22 @@ let french_phone = DataType::FrenchPhoneNumber.random(&mut generator);
 
 ## Available Data Types
 
-**Internet**: EmailDomain, HttpStatusCode, MimeType, OpenSourceApp, TopLevelDomain, UserAgent,
-**France**: FrenchStreet, FrenchRoadType, FrenchCounty, LongestFrenchRiver,
-**Companies**: CarBrand, CompanyName, Job,
-**Computer science**: FileExtension, ProgrammingLanguage, ProgrammingParadigm, EditorColourTheme, ItDomain,
-Painter, Writer, Composer, Mathematician, Physician, Biologist, ComputerScientist, Philosopher,
-HexColour, HslaColour, HslColour, RgbaColour, RgbColour, ColourName,
-Address, FrenchAddress, FrenchPostCode, Latitude, LatitudeLongitude, Longitude, UkAddress, UkPostCode,
-UsStateAbbr, AmericanState, UsRoads, UsRoadTypes,
-ChemicalElement, MathematicalFunction,
-FirstName, FrenchFirstName, FrenchLastName, LastName, NameTitle,
-MythologicalCreature,
-LiteraryGenre, ArchitecturalStyle, MusicalGenre, MusicalInstrument,
-DaysOfWeek, Month, DaysOfWeekAbbr, MonthsAbbr, TimeZone, TimeUnit, AmPm,
-SchoolSubject, AcademicDiscipline, DegreesTitle, University,
-HistoricalBattle,
-Animal, Mammal, Bird, Insect, Fishe, Amphibian, Reptile, Mollusc, AnimalType,
-AlphanumericCapitalChar, AlphanumericChar, Boolean, CapitalChar, Digit, LowerChar,
-CreditCard, Email, FrenchEmail, FrenchLicencePlate, FrenchPhoneNumber, NhsNumber, Password, PhoneNumber, SecuriteSociale, Sentence, UkLicencePlate, UkPhoneNumber,
-RandomIsbn10, RandomIsbn13,
-Bic, Iban, Isin,
-DirPath, FileName, FilePath, Ipv4, Ipv6, MacAddress, Semver, SemverStable, SemverUnstable,
-Country, City, Continent, CountryCode, Street, LongestRiver,
-TypesOfCloud,
-Word,
-UkCountyCode, UkPostcodeArea, UkCounty, UkCity, UkRoadType, LongestUkRiver, UkStreet,
-Sport,
-Constellation, Planet, Star, Galaxy,
-CurrencyName, CurrencySymbol, CurrencyCode,
+- **Internet**: EmailDomain, HttpStatusCode, MimeType, OpenSourceApp, TopLevelDomain, UserAgent, Ipv4, Ipv6, MacAddress
+- **Companies**: CarBrand, CompanyName, Job
+- **Computer science**: FileExtension, ProgrammingLanguage, ProgrammingParadigm, EditorColourTheme, ItDomain, DirPath, FileName, FilePath, Semver, SemverStable, SemverUnstable
+- **Famous people**: Painter, Writer, Composer, Mathematician, Physician, Biologist, ComputerScientist, Philosopher
+- **Colours**: HexColour, HslaColour, HslColour, RgbaColour, RgbColour, ColourName
+- **Geography**: Latitude, LatitudeLongitude, Longitude, FrenchRiver, Country, City, Continent, CountryCode, Street, River, UkRiver
+- **Addresses**: Address, FrenchAddress, FrenchPostCode, UkAddress, UkPostCode, FrenchStreet, FrenchRoadType, FrenchCounty, UsStateAbbr, UsState, UsRoads, UsRoadTypes, UkCountyCode, UkPostcodeArea, UkCounty, UkCity, UkRoadType, UkStreet
+- **Science**: ChemicalElement, MathematicalFunction
+- **Names**: FirstName, FrenchFirstName, FrenchLastName, LastName, NameTitle
+- **Arts**: LiteraryGenre, ArchitecturalStyle, MusicalGenre, MusicalInstrument
+- **Time**: DaysOfWeek, Month, DaysOfWeekAbbr, MonthsAbbr, TimeZone, TimeUnit, AmPm
+- **Animals**: Animal, Mammal, Bird, Insect, MythologicalCreature, Fish, Amphibian, Reptile, Mollusc, AnimalType
+- **Education**: SchoolSubject, AcademicDiscipline, DegreesTitle, University, HistoricalBattle, Sport
+- **Primitives**: AlphanumericCapitalChar, AlphanumericChar, Boolean, CapitalChar, Digit, LowerChar
+- **Personal data**: CreditCard, Email, FrenchEmail, FrenchLicencePlate, FrenchPhoneNumber, NhsNumber, Password, PhoneNumber, SecuriteSociale, UkLicencePlate, UkPhoneNumber
+- **ISBNs**: RandomIsbn10, RandomIsbn13
+- **Banks & finance**: Bic, Iban, Isin, CurrencyName, CurrencySymbol, CurrencyCode
+- **Text**: Word, Sentence, Paragraph
+- **Sky & space**: Constellation, Planet, Star, Galaxy, TypesOfCloud
