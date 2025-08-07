@@ -177,6 +177,7 @@ personal, Password, password
 personal, PhoneNumber, phone_number
 personal, SecuriteSociale, securite_sociale
 personal, Sentence, sentence
+personal, StreetNumber, street_number
 personal, Paragraph, paragraph
 personal, UkLicencePlate, uk_licence_plate
 personal, UkPhoneNumber, uk_phone_number
@@ -264,7 +265,7 @@ us, UsStateAbbr, US_STATE_ABBR
 us, UsState, US_STATES
 us, UsRoads, US_ROADS
 us, UsRoadTypes, US_ROAD_TYPES
-weather, TypesOfCloud, TYPES_OF_CLOUDS
+weather, CloudType, TYPES_OF_CLOUDS
 words, Word, WORDS
 work, CarBrand, CAR_BRANDS
 work, CompanyName, COMPANY_NAMES

@@ -104,7 +104,7 @@ let french_phone = DataType::FrenchPhoneNumber.random(&mut generator);
 - **Famous people**: Painter, Writer, Composer, Mathematician, Physician, Biologist, ComputerScientist, Philosopher
 - **Colours**: HexColour, HslaColour, HslColour, RgbaColour, RgbColour, ColourName
 - **Geography**: Latitude, LatitudeLongitude, Longitude, FrenchRiver, Country, City, Continent, CountryCode, Street, River, UkRiver
-- **Addresses**: Address, FrenchAddress, FrenchPostCode, UkAddress, UkPostCode, FrenchStreet, FrenchRoadType, FrenchCounty, UsStateAbbr, UsState, UsRoads, UsRoadTypes, UkCountyCode, UkPostcodeArea, UkCounty, UkCity, UkRoadType, UkStreet
+- **Addresses**: Address, FrenchAddress, FrenchPostCode, UkAddress, UkPostCode, FrenchStreet, FrenchRoadType, FrenchCounty, UsStateAbbr, UsState, UsRoads, UsRoadTypes, UkCountyCode, UkPostcodeArea, UkCounty, UkCity, UkRoadType, UkStreet, StreetNumber
 - **Science**: ChemicalElement, MathematicalFunction
 - **Names**: FirstName, FrenchFirstName, FrenchLastName, LastName, NameTitle
 - **Arts**: LiteraryGenre, ArchitecturalStyle, MusicalGenre, MusicalInstrument
@@ -116,4 +116,4 @@ let french_phone = DataType::FrenchPhoneNumber.random(&mut generator);
 - **ISBNs**: RandomIsbn10, RandomIsbn13
 - **Banks & finance**: Bic, Iban, Isin, CurrencyName, CurrencySymbol, CurrencyCode
 - **Text**: Word, Sentence, Paragraph
-- **Sky & space**: Constellation, Planet, Star, Galaxy, TypesOfCloud
+- **Sky & space**: Constellation, Planet, Star, Galaxy, CloudType

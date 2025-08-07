@@ -174,3 +174,19 @@ pub fn uk_licence_plate(generator: &mut DataGenerator) -> String {
         DataType::CapitalChar.random(generator),
     )
 }
+
+pub fn street_number(generator: &mut DataGenerator) -> String {
+    format!(
+        "{}{}",
+        generator.rng().random_range(0..500),
+        if generator.rng().random_bool(0.2) {
+            if generator.rng().random_bool(0.4) {
+                " ter"
+            } else {
+                " bis"
+            }
+        } else {
+            ""
+        }
+    )
+}
