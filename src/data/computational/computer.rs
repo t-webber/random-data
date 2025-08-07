@@ -1,4 +1,8 @@
-use rand::{Rng as _, seq::IndexedRandom as _};
+use rand::{
+    Rng as _,
+    distr::{Distribution as _, weighted::WeightedIndex},
+    seq::IndexedRandom as _,
+};
 
 use crate::{DataGenerator, DataType};
 
@@ -77,8 +81,12 @@ pub fn ipv6(generator: &mut DataGenerator) -> String {
     )
 }
 
+#[expect(clippy::unwrap_used, reason = "non empty, sum non zero, no overflow")]
 pub fn dir_path(generator: &mut DataGenerator) -> String {
-    let len = generator.rng().random_range(0u32..=5);
+    let weights = [5u32, 10, 15, 20, 25, 25];
+    let dist = WeightedIndex::new(weights).unwrap();
+    let len = dist.sample(generator.rng());
+
     let mut output = String::from("/");
     for _ in 0..len {
         output.push_str(&DataType::Word.random(generator));
