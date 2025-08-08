@@ -5,3 +5,4 @@ pub mod finance;
 pub mod isbn;
 pub mod personal;
 pub mod primitive;
+pub mod text;

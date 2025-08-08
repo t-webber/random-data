@@ -104,29 +104,6 @@ pub fn password(generator: &mut DataGenerator) -> String {
     output
 }
 
-pub fn sentence(generator: &mut DataGenerator) -> String {
-    let mut output = String::new();
-    let len = generator.rng().random_range(10..20);
-    for _ in 0u32..len {
-        output.push_str(&DataType::Word.random(generator));
-        output.push(' ');
-    }
-    output.push_str(&DataType::Word.random(generator));
-    output.push('.');
-    output
-}
-
-pub fn paragraph(generator: &mut DataGenerator) -> String {
-    let mut output = String::new();
-    let len = generator.rng().random_range(5..10);
-    for _ in 0u32..len {
-        output.push_str(&DataType::Sentence.random(generator));
-        output.push(' ');
-    }
-    output.push_str(&DataType::Sentence.random(generator));
-    output
-}
-
 pub fn credit_card(generator: &mut DataGenerator) -> String {
     let len = generator.rng().random_range(12..19);
     let mut output = String::new();
@@ -172,21 +149,5 @@ pub fn uk_licence_plate(generator: &mut DataGenerator) -> String {
         DataType::CapitalChar.random(generator),
         DataType::CapitalChar.random(generator),
         DataType::CapitalChar.random(generator),
-    )
-}
-
-pub fn street_number(generator: &mut DataGenerator) -> String {
-    format!(
-        "{}{}",
-        generator.rng().random_range(0..500),
-        if generator.rng().random_bool(0.2) {
-            if generator.rng().random_bool(0.4) {
-                " ter"
-            } else {
-                " bis"
-            }
-        } else {
-            ""
-        }
     )
 }

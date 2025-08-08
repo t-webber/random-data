@@ -146,6 +146,7 @@ address, FrenchPostCode, french_post_code
 address, Latitude, latitude
 address, LatitudeLongitude, latitude_longitude
 address, Longitude, longitude
+address, StreetNumber, street_number
 address, UkAddress, uk_address
 address, UkPostCode, uk_post_code
 colour, HexColour, hex_colour
@@ -176,9 +177,6 @@ personal, NhsNumber, nhs_number
 personal, Password, password
 personal, PhoneNumber, phone_number
 personal, SecuriteSociale, securite_sociale
-personal, Sentence, sentence
-personal, StreetNumber, street_number
-personal, Paragraph, paragraph
 personal, UkLicencePlate, uk_licence_plate
 personal, UkPhoneNumber, uk_phone_number
 primitive, AlphanumericCapitalChar, alphanumeric_capital_char
@@ -187,6 +185,8 @@ primitive, Boolean, boolean
 primitive, CapitalChar, capital_char
 primitive, Digit, digit
 primitive, LowerChar, lower_char
+text, Sentence, sentence
+text, Paragraph, paragraph
 ;
 // cd src/data/raw && ls | while read f; do cat $f | grep '^pub const' | tr ':' ' ' | awk '{print $3}' | while read l; do echo "$f, $(caseify -p $l), $l" | sed 's/\.rs//;s/\( .*s\), /\1, /'; done  ; done
 art, LiteraryGenre, LITERARY_GENRES
