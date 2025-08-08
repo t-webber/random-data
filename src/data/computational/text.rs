@@ -22,6 +22,9 @@ pub fn sentence(generator: &mut DataGenerator) -> String {
 
     for _ in 0u32..len {
         output.push_str(&DataType::Word.random(generator));
+        if generator.rng().random_bool(0.1) {
+            output.push(',');
+        }
         output.push(' ');
     }
     output.push_str(&DataType::Word.random(generator));
