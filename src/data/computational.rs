@@ -3,6 +3,7 @@ pub mod colour;
 pub mod computer;
 pub mod finance;
 pub mod isbn;
+pub mod people;
 pub mod personal;
 pub mod primitive;
 pub mod text;

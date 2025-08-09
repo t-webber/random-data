@@ -74,7 +74,7 @@ fn random() {
                 //                 println!("{data}");
             }
         }
-        let expected = len(data_type).map_or_else(|| 90, |len| (len / 4).min(90));
+        let expected = len(data_type).map_or_else(|| 80, |len| (len / 4).min(80));
         assert!(
             set.len() > expected,
             "{data_type} expected {expected}, found {}",

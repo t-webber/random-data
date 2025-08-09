@@ -83,3 +83,15 @@ pub fn street_number(generator: &mut DataGenerator) -> String {
         }
     )
 }
+
+pub fn french_street_name(generator: &mut DataGenerator) -> String {
+    if generator.rng().random_bool(0.3) {
+        DataType::FamousFrenchStreet.random(generator)
+    } else {
+        format!(
+            "{} {}",
+            DataType::FrenchRoadType.random(generator),
+            DataType::FamousPerson.random(generator)
+        )
+    }
+}

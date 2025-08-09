@@ -142,6 +142,7 @@ strings!(
 address, Address, address
 address, FrenchAddress, french_address
 address, FrenchPostCode, french_post_code
+address, FrenchStreet, french_street_name
 address, Latitude, latitude
 address, LatitudeLongitude, latitude_longitude
 address, Longitude, longitude
@@ -167,6 +168,7 @@ finance, Iban, iban
 finance, Isin, isin
 isbn, RandomIsbn10, random_isbn10
 isbn, RandomIsbn13, random_isbn13
+people, FamousPerson, famous_person
 personal, CreditCard, credit_card
 personal, Email, email
 personal, FrenchEmail, french_email
@@ -213,7 +215,7 @@ fauna, Amphibian, AMPHIBIANS
 fauna, Reptile, REPTILES
 fauna, Mollusc, MOLLUSC
 fauna, AnimalType, ANIMAL_TYPES
-france, FrenchStreet, FRENCH_STREETS
+france, FamousFrenchStreet, FRENCH_STREETS
 france, FrenchRoadType, FRENCH_ROAD_TYPES
 france, FrenchCounty, FRENCH_COUNTIES
 france, FrenchRiver, FRENCH_RIVERS
@@ -263,12 +265,16 @@ university, DegreesTitle, DEGREES_TITLES
 university, University, UNIVERSITIES
 us, UsStateAbbr, US_STATE_ABBR
 us, UsState, US_STATES
-us, UsRoads, US_ROADS
-us, UsRoadTypes, US_ROAD_TYPES
+us, UsRoad, US_ROADS
+us, UsRoadType, US_ROAD_TYPES
 weather, CloudType, TYPES_OF_CLOUDS
 words, Word, WORDS
+work, AirDefenseCompanyName, AIR_DEFENSE_COMPANY_NAMES
+work, BioCompanyName, BIO_COMPANY_NAMES
 work, CarBrand, CAR_BRANDS
+work, ClothingCompanyName, CLOTHING_COMPANY_NAMES
 work, CompanyName, COMPANY_NAMES
+work, ItCompanyName, IT_COMPANY_NAMES
 work, Job, JOBS
 world, Country, COUNTRIES
 world, City, CITIES

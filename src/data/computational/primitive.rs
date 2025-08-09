@@ -40,10 +40,5 @@ pub fn digit(generator: &mut DataGenerator) -> String {
 }
 
 pub fn number(generator: &mut DataGenerator) -> String {
-    let mut output = String::new();
-    let len = generator.rng().random_range(1u32..=10);
-    for _ in 0..len {
-        output.push_str(&digit(generator));
-    }
-    output
+    generator.rng().random_range(0..1_000_000_000).to_string()
 }
