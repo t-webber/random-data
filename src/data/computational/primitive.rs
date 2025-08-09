@@ -38,3 +38,12 @@ pub fn boolean(generator: &mut DataGenerator) -> String {
 pub fn digit(generator: &mut DataGenerator) -> String {
     generator.rng().random_range(0..=9).to_string()
 }
+
+pub fn number(generator: &mut DataGenerator) -> String {
+    let mut output = String::new();
+    let len = generator.rng().random_range(1u32..=10);
+    for _ in 0..len {
+        output.push_str(&digit(generator));
+    }
+    output
+}

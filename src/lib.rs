@@ -35,6 +35,7 @@
     clippy::single_call_fn,
     clippy::pattern_type_mismatch,
     clippy::module_name_repetitions,
+    clippy::else_if_without_else,
     clippy::implicit_return,
     reason = "bad lint"
 )]

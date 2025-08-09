@@ -123,7 +123,6 @@ impl DataType {
 }
 
 #[expect(clippy::use_debug, reason = "fine here")]
-#[expect(clippy::min_ident_chars, reason = "follow trait naming patterns")]
 impl fmt::Display for DataType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{self:?}")
@@ -185,6 +184,7 @@ primitive, Boolean, boolean
 primitive, CapitalChar, capital_char
 primitive, Digit, digit
 primitive, LowerChar, lower_char
+primitive, Number, number
 text, Sentence, sentence
 text, Paragraph, paragraph
 ;
