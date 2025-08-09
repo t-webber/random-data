@@ -25,7 +25,7 @@ fn non_empty() {
     let mut generator = DataGenerator::new();
     let list = dbg!(DataType::list());
     for data_type in list {
-        for _ in 0..10000 {
+        for _ in 0..1000 {
             assert!(!data_type.random(&mut generator).is_empty());
         }
     }

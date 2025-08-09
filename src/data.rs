@@ -274,8 +274,16 @@ work, BioCompanyName, BIO_COMPANY_NAMES
 work, CarBrand, CAR_BRANDS
 work, ClothingCompanyName, CLOTHING_COMPANY_NAMES
 work, CompanyName, COMPANY_NAMES
+work, ConstructionCompanyName, CONSTRUCTION_COMPANY_NAMES
+work, EnergyCompanyName, ENERGY_COMPANY_NAMES
+work, FinanceCompanyName, FINANCE_COMPANY_NAMES
+work, FoodCompanyName, FOOD_COMPANY_NAMES
 work, ItCompanyName, IT_COMPANY_NAMES
 work, Job, JOBS
+work, MediaCompanyName, MEDIA_COMPANY_NAMES
+work, RetailCompanyName, RETAIL_COMPANY_NAMES
+work, TelecomCompanyName, TELECOM_COMPANY_NAMES
+work, TravelCompanyName, TRAVEL_COMPANY_NAMES
 world, Country, COUNTRIES
 world, City, CITIES
 world, Continent, CONTINENTS
