@@ -11,27 +11,31 @@ macro_rules! strings {
     ($($fn_module:ident, $fn_feature:literal, $fn_variant:ident, $fn_func:ident)*;  $($list_module:ident, $list_feature:literal, $list_variant:ident, $list_const:ident)*) => {
 
 
-            /// Representation of type that can be generated randomly.
-            ///
-            /// There are two types of generated data: some are hard-coded with a list of possible
-            /// values, others are produced by formulas. Both are usable the same way:
-            ///
-            /// ```
-            /// use random_data::*;
-            /// let mut generator = DataGenerator::new();
-            ///
-            /// #[cfg(feature = "datetime")]
-            /// {
-            ///     let random_month = DataType::Month.random(&mut generator);
-            ///     println!("{random_month}");
-            /// }
-            ///
-            /// #[cfg(feature = "address")]
-            /// {
-            ///     let random_address = DataType::Address.random(&mut generator);
-            ///     println!("{random_address}");
-            /// }
-            /// ```
+        /// Representation of type that can be generated randomly.
+        ///
+        /// There are two types of generated data: some are hard-coded with a list of possible
+        /// values, others are produced by formulas. Both are usable the same way. If you don't
+        /// want to load all the possible values for all the types, you can choose to enable
+        /// the data types you want (all features are enabled by default).
+        ///
+        /// # Examples
+        ///
+        /// ```
+        /// use random_data::*;
+        /// let mut generator = DataGenerator::new();
+        ///
+        /// #[cfg(feature = "datetime")]
+        /// {
+        ///     let random_month = DataType::Month.random(&mut generator);
+        ///     println!("{random_month}");
+        /// }
+        ///
+        /// #[cfg(feature = "address")]
+        /// {
+        ///     let random_address = DataType::Address.random(&mut generator);
+        ///     println!("{random_address}");
+        /// }
+        /// ```
         #[non_exhaustive]
         #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone)]
         #[allow(clippy::arbitrary_source_item_ordering, reason="ordered by type")]

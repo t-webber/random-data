@@ -1,5 +1,4 @@
-//! Generate random data of any kind.
-
+ #![doc = include_str!("../README.md")]
 #![warn(
     bindings_with_variant_name,
     non_snake_case,
