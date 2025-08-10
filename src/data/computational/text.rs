@@ -2,7 +2,7 @@ use rand::Rng as _;
 
 use crate::{DataGenerator, DataType};
 
-#[expect(clippy::unwrap_used, reason = "tests assure the first element exists")]
+#[allow(clippy::unwrap_used, reason = "tests assure the first element exists")]
 fn push_first_word(generator: &mut DataGenerator, output: &mut String) {
     let first_word = DataType::Word.random(generator);
     let mut chars = first_word.chars();

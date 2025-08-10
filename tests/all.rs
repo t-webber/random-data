@@ -50,15 +50,22 @@ fn len(data_type: &DataType) -> Option<usize> {
     if let Some(values) = data_type.values() {
         Some(values.len())
     } else {
-        Some(match data_type {
-            DataType::AlphanumericCapitalChar => 36,
-            DataType::AlphanumericChar => 62,
-            DataType::Boolean => 2,
-            DataType::CapitalChar => 26,
-            DataType::Digit => 10,
-            DataType::LowerChar => 26,
-            _ => return None,
-        })
+        #[cfg(feature = "minimal")]
+        {
+            Some(match data_type {
+                DataType::AlphanumericCapitalChar => 36,
+                DataType::AlphanumericChar => 62,
+                DataType::Boolean => 2,
+                DataType::CapitalChar => 26,
+                DataType::Digit => 10,
+                DataType::LowerChar => 26,
+                _ => return None,
+            })
+        }
+        #[cfg(not(feature = "minimal"))]
+        {
+            None
+        }
     }
 }
 

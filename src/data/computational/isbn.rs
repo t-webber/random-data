@@ -2,8 +2,8 @@ use rand::Rng as _;
 
 use crate::DataGenerator;
 
-#[expect(clippy::indexing_slicing, reason = "index in bounds")]
-#[expect(
+#[allow(clippy::indexing_slicing, reason = "index in bounds")]
+#[allow(
     clippy::cast_possible_truncation,
     clippy::unwrap_used,
     reason = "small enough"
@@ -38,7 +38,7 @@ pub fn random_isbn10(generator: &mut DataGenerator) -> String {
     )
 }
 
-#[expect(clippy::indexing_slicing, reason = "index in bounds")]
+#[allow(clippy::indexing_slicing, reason = "index in bounds")]
 pub fn random_isbn13(generator: &mut DataGenerator) -> String {
     let mut isbn = Vec::with_capacity(12);
     isbn.push(9);

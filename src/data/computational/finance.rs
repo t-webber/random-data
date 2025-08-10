@@ -1,6 +1,6 @@
 use rand::{Rng as _, seq::IndexedRandom as _};
 
-use crate::{DataGenerator, DataType};
+use crate::{DataGenerator, DataType, primitives::capital_char};
 
 pub fn isin(generator: &mut DataGenerator) -> String {
     format!(
@@ -13,27 +13,27 @@ pub fn isin(generator: &mut DataGenerator) -> String {
 pub fn bic(generator: &mut DataGenerator) -> String {
     format!(
         "{}{}{}{}{country}{}{}{branch}",
-        DataType::CapitalChar.random(generator),
-        DataType::CapitalChar.random(generator),
-        DataType::CapitalChar.random(generator),
-        DataType::CapitalChar.random(generator),
-        DataType::CapitalChar.random(generator),
-        DataType::CapitalChar.random(generator),
+        capital_char(generator.rng()),
+        capital_char(generator.rng()),
+        capital_char(generator.rng()),
+        capital_char(generator.rng()),
+        capital_char(generator.rng()),
+        capital_char(generator.rng()),
         country = DataType::CountryCode.random(generator),
         branch = if generator.rng().random_bool(0.8) {
             "XXX".to_owned()
         } else {
             format!(
                 "{}{}{}",
-                DataType::CapitalChar.random(generator),
-                DataType::CapitalChar.random(generator),
-                DataType::CapitalChar.random(generator)
+                capital_char(generator.rng()),
+                capital_char(generator.rng()),
+                capital_char(generator.rng()),
             )
         }
     )
 }
 
-#[expect(clippy::unwrap_used, reason = "non empty string")]
+#[allow(clippy::unwrap_used, reason = "non empty string")]
 pub fn iban(generator: &mut DataGenerator) -> String {
     let mut output = DataType::CountryCode.random(generator);
     for _ in 0..26u8 {

@@ -2,7 +2,7 @@ use rand::seq::IndexedRandom as _;
 
 use crate::{DataGenerator, DataType};
 
-#[expect(clippy::unwrap_used, reason = "array not empty")]
+#[allow(clippy::unwrap_used, reason = "array not empty")]
 pub fn famous_person(generator: &mut DataGenerator) -> String {
     [
         DataType::Painter,

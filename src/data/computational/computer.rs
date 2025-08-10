@@ -23,7 +23,7 @@ pub fn semver_stable(generator: &mut DataGenerator) -> String {
     )
 }
 
-#[expect(clippy::unwrap_used, reason = "array not empty")]
+#[allow(clippy::unwrap_used, reason = "array not empty")]
 pub fn semver_unstable(generator: &mut DataGenerator) -> String {
     format!(
         "{}-{}{}",
@@ -81,7 +81,7 @@ pub fn ipv6(generator: &mut DataGenerator) -> String {
     )
 }
 
-#[expect(clippy::unwrap_used, reason = "non empty, sum non zero, no overflow")]
+#[allow(clippy::unwrap_used, reason = "non empty, sum non zero, no overflow")]
 pub fn dir_path(generator: &mut DataGenerator) -> String {
     let weights = [5u32, 10, 15, 20, 25, 25];
     let dist = WeightedIndex::new(weights).unwrap();

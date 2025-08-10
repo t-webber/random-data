@@ -1,6 +1,9 @@
 use rand::Rng as _;
 
-use crate::{DataGenerator, DataType};
+use crate::{
+    DataGenerator, DataType,
+    primitives::{alphanumeric_capital_char, capital_char},
+};
 
 pub fn address(generator: &mut DataGenerator) -> String {
     format!(
@@ -37,10 +40,10 @@ pub fn uk_post_code(generator: &mut DataGenerator) -> String {
         "{}{}{} {}{}{}",
         DataType::UkPostcodeArea.random(generator),
         generator.rng().random_range(1..=9),
-        DataType::AlphanumericCapitalChar.random(generator),
+        alphanumeric_capital_char(generator.rng()),
         generator.rng().random_range(1..=9),
-        DataType::CapitalChar.random(generator),
-        DataType::CapitalChar.random(generator),
+        capital_char(generator.rng()),
+        capital_char(generator.rng()),
     )
 }
 

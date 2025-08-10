@@ -3,6 +3,8 @@ mod raw;
 extern crate alloc;
 use crate::generator::DataGenerator;
 use alloc::fmt;
+
+#[allow(unused_imports, reason = "minimal feature doesn't use this")]
 use rand::seq::IndexedRandom as _;
 
 macro_rules! strings {
@@ -18,16 +20,22 @@ macro_rules! strings {
             /// use random_data::*;
             /// let mut generator = DataGenerator::new();
             ///
-            /// let random_month = DataType::Month.random(&mut generator);
-            /// println!("{random_month}");
+            /// #[cfg(feature = "datetime")]
+            /// {
+            ///     let random_month = DataType::Month.random(&mut generator);
+            ///     println!("{random_month}");
+            /// }
             ///
-            /// let random_address = DataType::Address.random(&mut generator);
-            /// println!("{random_address}");
+            /// #[cfg(feature = "address")]
+            /// {
+            ///     let random_address = DataType::Address.random(&mut generator);
+            ///     println!("{random_address}");
+            /// }
             /// ```
         #[non_exhaustive]
         #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone)]
         #[allow(clippy::arbitrary_source_item_ordering, reason="ordered by type")]
-        #[expect(missing_docs, reason="macro produced")]
+        #[allow(missing_docs, reason="macro produced")]
         pub enum DataType {
             $(
                 #[cfg(feature = $fn_feature)]
@@ -71,8 +79,11 @@ macro_rules! strings {
             /// use random_data::*;
             /// let mut generator = DataGenerator::new();
             ///
-            /// let random_address = DataType::Address.random(&mut generator);
-            /// println!("{random_address}");
+            /// #[cfg(feature = "science")]
+            /// {
+            ///     let random_address = DataType::ChemicalElement.random(&mut generator);
+            ///     println!("{random_address}");
+            /// }
             /// ```
             pub fn random(&self, generator: &mut DataGenerator) -> String {
                 match self {
@@ -100,13 +111,18 @@ macro_rules! strings {
             /// use random_data::*;
             /// let mut generator = DataGenerator::new();
             ///
-            /// let month = DataType::Month.random(&mut generator);
-            /// let all_months = DataType::Month.values().unwrap();
-            /// assert!(all_months.contains(&month.as_ref()));
+            /// #[cfg(feature = "people")]
+            /// {
+            ///     let mathematician = DataType::Mathematician.random(&mut generator);
+            ///     let mathematicians = DataType::Mathematician.values().unwrap();
+            ///     assert!(mathematicians.contains(&mathematician.as_ref()));
+            /// }
             ///
-            /// assert!(DataType::Address.values().is_none());
+            /// #[cfg(feature = "personal")]
+            /// assert!(DataType::Email.values().is_none());
             /// ```
             #[must_use]
+            #[allow(unreachable_patterns, reason="features")]
             pub const fn values(&self) -> Option<&'static[&'static str]> {
                 match self {
                     $(
@@ -143,19 +159,37 @@ macro_rules! strings {
 
 impl DataType {
     /// List of all the available data types.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use random_data::*;
+    ///
+    /// #[cfg(feature = "computer")]
+    /// assert!(DataType::list().contains(&DataType::DirPath));
+    /// ```
     #[must_use]
     pub const fn list() -> &'static [Self] {
         Self::TYPES_LIST
     }
 
     /// List of all the available data types, in string format.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use random_data::*;
+    ///
+    /// #[cfg(feature = "sky_space")]
+    /// assert!(DataType::list_str().contains(&"TypesOfCloud"));
+    /// ```
     #[must_use]
     pub const fn list_str() -> &'static [&'static str] {
         Self::STRINGS_LIST
     }
 }
 
-#[expect(clippy::use_debug, reason = "fine here")]
+#[allow(clippy::use_debug, reason = "fine here")]
 impl fmt::Display for DataType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{self:?}")
@@ -213,13 +247,13 @@ personal, "personal", PhoneNumber, phone_number
 personal, "personal", SecuriteSociale, securite_sociale
 personal, "personal", UkLicencePlate, uk_licence_plate
 personal, "personal", UkPhoneNumber, uk_phone_number
-primitive, "minimal", AlphanumericCapitalChar, alphanumeric_capital_char
-primitive, "minimal", AlphanumericChar, alphanumeric_char
-primitive, "minimal", Boolean, boolean
-primitive, "minimal", CapitalChar, capital_char
-primitive, "minimal", Digit, digit
-primitive, "minimal", LowerChar, lower_char
-primitive, "minimal", Number, number
+primitives, "minimal", AlphanumericCapitalChar, alphanumeric_capital_char
+primitives, "minimal", AlphanumericChar, alphanumeric_char
+primitives, "minimal", Boolean, boolean
+primitives, "minimal", CapitalChar, capital_char
+primitives, "minimal", Digit, digit
+primitives, "minimal", LowerChar, lower_char
+primitives, "minimal", Number, number
 text, "text", Sentence, sentence
 text, "text", Paragraph, paragraph
 ;

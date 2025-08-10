@@ -2,7 +2,7 @@ use core::iter::repeat_with;
 
 use rand::Rng as _;
 
-use crate::{DataGenerator, DataType};
+use crate::{DataGenerator, DataType, primitives::capital_char};
 
 pub fn phone_number(generator: &mut DataGenerator) -> String {
     generator
@@ -45,8 +45,8 @@ pub fn french_email(generator: &mut DataGenerator) -> String {
     )
 }
 
-#[expect(clippy::indexing_slicing, reason = "index in bounds")]
-#[expect(
+#[allow(clippy::indexing_slicing, reason = "index in bounds")]
+#[allow(
     clippy::cast_possible_truncation,
     clippy::cast_possible_wrap,
     reason = "number is small"
@@ -78,7 +78,7 @@ pub fn nhs_number(generator: &mut DataGenerator) -> String {
     )
 }
 
-#[expect(clippy::unwrap_used, reason = "it's a valid number")]
+#[allow(clippy::unwrap_used, reason = "it's a valid number")]
 pub fn securite_sociale(generator: &mut DataGenerator) -> String {
     let rng = generator.rng();
     let nir = format!(
@@ -125,13 +125,13 @@ pub fn credit_card(generator: &mut DataGenerator) -> String {
 pub fn french_licence_plate(generator: &mut DataGenerator) -> String {
     format!(
         "{}{}-{}{}{}-{}{}",
-        DataType::CapitalChar.random(generator),
-        DataType::CapitalChar.random(generator),
+        capital_char(generator.rng()),
+        capital_char(generator.rng()),
         generator.rng().random_range(0..=9u32),
         generator.rng().random_range(0..=9u32),
         generator.rng().random_range(0..=9u32),
-        DataType::CapitalChar.random(generator),
-        DataType::CapitalChar.random(generator),
+        capital_char(generator.rng()),
+        capital_char(generator.rng())
     )
 }
 
@@ -143,11 +143,11 @@ pub fn uk_licence_plate(generator: &mut DataGenerator) -> String {
     };
     format!(
         "{}{}{:02}{}{}{}",
-        DataType::CapitalChar.random(generator),
-        DataType::CapitalChar.random(generator),
+        capital_char(generator.rng()),
+        capital_char(generator.rng()),
         generator.rng().random_range(range),
-        DataType::CapitalChar.random(generator),
-        DataType::CapitalChar.random(generator),
-        DataType::CapitalChar.random(generator),
+        capital_char(generator.rng()),
+        capital_char(generator.rng()),
+        capital_char(generator.rng()),
     )
 }

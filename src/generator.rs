@@ -1,6 +1,6 @@
 use rand::rngs::ThreadRng;
 
-/// Generator provded to the data types. Refer to [`DataType`] for usage information.
+/// Generator provded to the data types. Refer to [`DataType`](crate::DataType) for usage information.
 #[derive(Default)]
 pub struct DataGenerator(ThreadRng);
 

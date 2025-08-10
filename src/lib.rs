@@ -28,14 +28,13 @@
 )]
 #![allow(
     clippy::allow_attributes,
-    unused_imports,
     reason = "features can make lint unfulfilled"
 )]
-#![expect(clippy::blanket_clippy_restriction_lints, reason = "enable all lints")]
+#![allow(clippy::blanket_clippy_restriction_lints, reason = "enable all lints")]
 #![allow(clippy::missing_docs_in_private_items, reason = "explicit names")]
 #![allow(clippy::non_ascii_literal, reason = "not-understandable")]
-#![expect(clippy::self_named_module_files, reason = "style choice")]
-#![expect(clippy::pub_use, reason = "simpler and more robust API")]
+#![allow(clippy::self_named_module_files, reason = "style choice")]
+#![allow(clippy::pub_use, reason = "simpler and more robust API")]
 #![allow(
     clippy::single_call_fn,
     clippy::pattern_type_mismatch,
@@ -44,14 +43,43 @@
     clippy::implicit_return,
     reason = "bad lint"
 )]
-#![expect(clippy::unseparated_literal_suffix, reason = "chosen style")]
+#![allow(clippy::unseparated_literal_suffix, reason = "chosen style")]
 #![allow(clippy::missing_inline_in_public_items, reason = "bad lint")]
-#![expect(
+#![allow(
     clippy::arithmetic_side_effects,
     clippy::as_conversions,
     reason = "numbers are small"
 )]
 
+#[cfg(not(any(
+    feature = "address",
+    feature = "animals",
+    feature = "art",
+    feature = "colours",
+    feature = "computer",
+    feature = "currencies",
+    feature = "datetime",
+    feature = "education",
+    feature = "finance",
+    feature = "france",
+    feature = "history",
+    feature = "internet",
+    feature = "minimal",
+    feature = "names",
+    feature = "people",
+    feature = "personal",
+    feature = "science",
+    feature = "sky_space",
+    feature = "text",
+    feature = "uk",
+    feature = "us",
+    feature = "work",
+    feature = "world",
+)))]
+compile_error!("You must enable at least one feature!");
+
 mod data;
 mod generator;
+mod primitives;
+
 pub use crate::{data::DataType, generator::DataGenerator};
