@@ -21,36 +21,36 @@ cargo add random-data
 ## Usage
 
 ```rust
-use random_data::{DataGenerator, DataType};
+use random_data::{DataType, DataGenerator};
 
 fn main() {
     let mut generator = DataGenerator::new();
 
     // Generate a random address
     let address = DataType::Address.random(&mut generator);
-    println!("Address: {}", address);
+    println!("Address: {address}");
 
     // Generate a random name
     let name = DataType::FirstName.random(&mut generator);
-    println!("Name: {}", name);
+    println!("Name: {name}");
 
     // Generate a random email
     let email = DataType::Email.random(&mut generator);
-    println!("Email: {}", email);
+    println!("Email: {email}");
 
     // Generate location data
     let country = DataType::Country.random(&mut generator);
     let coordinates = DataType::LatitudeLongitude.random(&mut generator);
-    println!("Location: {} at {}", country, coordinates);
+    println!("Location: {country} at {coordinates}");
 
     // Generate technical data
     let ip = DataType::Ipv4.random(&mut generator);
     let mac = DataType::MacAddress.random(&mut generator);
-    println!("Network: IP {} MAC {}", ip, mac);
+    println!("Network: IP {ip} MAC {mac}");
 
     // List all the possible data types
     let list = DataType::list_str();
-    println!("Possible data types: {}", list);
+    println!("Possible data types: {list:?}");
 }
 ```
 

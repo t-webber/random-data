@@ -1,4 +1,4 @@
- #![doc = include_str!("../README.md")]
+#![doc = include_str!("../README.md")]
 #![warn(
     bindings_with_variant_name,
     non_snake_case,

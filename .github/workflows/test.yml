@@ -37,4 +37,4 @@ jobs:
               run: cargo binstall -y cargo-hack
 
             - name: Check coverage
-              run: cargo hack test --each-feature --exclude-no-default-features
+              run: cargo hack test --each-feature --exclude-no-default-features -- --skip README
