@@ -51,33 +51,6 @@
     reason = "numbers are small"
 )]
 
-#[cfg(not(any(
-    feature = "address",
-    feature = "animals",
-    feature = "art",
-    feature = "colours",
-    feature = "computer",
-    feature = "currencies",
-    feature = "datetime",
-    feature = "education",
-    feature = "finance",
-    feature = "france",
-    feature = "history",
-    feature = "internet",
-    feature = "minimal",
-    feature = "names",
-    feature = "people",
-    feature = "personal",
-    feature = "science",
-    feature = "sky_space",
-    feature = "text",
-    feature = "uk",
-    feature = "us",
-    feature = "work",
-    feature = "world",
-)))]
-compile_error!("You must enable at least one feature!");
-
 mod data;
 mod generator;
 mod primitives;

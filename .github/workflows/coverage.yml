@@ -40,5 +40,5 @@ jobs:
                 )
                 for feature in "${features[@]}"; do
                   echo "Running coverage for feature: $feature"
-                  cargo tarpaulin --features "$feature" --no-default-features --fail-under 80
+                  cargo tarpaulin --features "$feature" --no-default-features --fail-under 100
                 done

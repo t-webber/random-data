@@ -1,4 +1,4 @@
-name: Coverage
+name: Tests
 
 on:
     push:
@@ -31,8 +31,8 @@ jobs:
             - name: Install cargo Binstall
               uses: cargo-bins/cargo-binstall@main
 
-            - name: Install tarpaulin
+            - name: Install cargo hack
               run: cargo binstall -y cargo-hack
 
             - name: Check coverage
-              run: cargo hack --each-feature --exclude-no-default-features
+              run: cargo hack test --each-feature --exclude-no-default-features
