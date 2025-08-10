@@ -15,7 +15,7 @@ jobs:
     coverage:
         strategy:
           matrix:
-            rust: [stable, nightly]
+            rust: [nightly]
             os: [ubuntu-latest, windows-latest, macos-latest]
 
         runs-on: ${{ matrix.os }}

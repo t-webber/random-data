@@ -1,4 +1,4 @@
-name: fmt
+name: Fmt
 
 on:
     push:
