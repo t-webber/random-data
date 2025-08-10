@@ -1,4 +1,4 @@
-name: Tests
+name: Coverage
 
 on:
     push:
@@ -12,7 +12,7 @@ env:
     CARGO_TERM_COLOR: always
 
 jobs:
-    test:
+    coverage:
         runs-on: ubuntu-latest
         strategy:
           matrix:
@@ -25,9 +25,14 @@ jobs:
             - name: Install Rust
               uses: actions-rs/toolchain@v1
               with:
-                toolchain: ${{ matrix.rust }}
+                toolchain: nightly
                 override: true
 
-            - name: Run tests
-              run: cargo test --verbose
+            - name: Install cargo Binstall
+              uses: cargo-bins/cargo-binstall@main
 
+            - name: Install tarpaulin
+              run: cargo binstall -y cargo-hack
+
+            - name: Check coverage
+              run: cargo hack --each-feature --exclude-no-default-features
