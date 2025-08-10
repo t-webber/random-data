@@ -13,11 +13,12 @@ env:
 
 jobs:
     doc:
-        runs-on: ubuntu-latest
         strategy:
           matrix:
             rust: [stable, nightly]
             os: [ubuntu-latest, windows-latest, macos-latest]
+
+        runs-on: ${{ matrix.os }}
 
         steps:
             - name: Checkout repository

@@ -13,11 +13,12 @@ env:
 
 jobs:
     fmt:
-        runs-on: ubuntu-latest
         strategy:
           matrix:
             rust: [stable, nightly]
             os: [ubuntu-latest, windows-latest, macos-latest]
+
+        runs-on: ${{ matrix.os }}
 
         steps:
             - name: Checkout repository
@@ -26,7 +27,7 @@ jobs:
             - name: Install Rust
               uses: actions-rs/toolchain@v1
               with:
-                toolchain: nightly
+                toolchain: ${{ matrix.rust }}
                 override: true
                 components: rustfmt
 
