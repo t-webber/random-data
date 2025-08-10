@@ -26,12 +26,17 @@
     clippy::nursery,
     clippy::cargo
 )]
+#![allow(
+    clippy::allow_attributes,
+    unused_imports,
+    reason = "features can make lint unfulfilled"
+)]
 #![expect(clippy::blanket_clippy_restriction_lints, reason = "enable all lints")]
 #![allow(clippy::missing_docs_in_private_items, reason = "explicit names")]
-#![expect(clippy::non_ascii_literal, reason = "not-understandable")]
+#![allow(clippy::non_ascii_literal, reason = "not-understandable")]
 #![expect(clippy::self_named_module_files, reason = "style choice")]
 #![expect(clippy::pub_use, reason = "simpler and more robust API")]
-#![expect(
+#![allow(
     clippy::single_call_fn,
     clippy::pattern_type_mismatch,
     clippy::module_name_repetitions,

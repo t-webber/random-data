@@ -1,9 +1,15 @@
+#[cfg(feature = "address")]
 pub mod address;
 pub mod colour;
+#[cfg(feature = "computer")]
 pub mod computer;
+#[cfg(feature = "finance")]
 pub mod finance;
 pub mod isbn;
+#[cfg(feature = "people")]
 pub mod people;
+#[cfg(feature = "personal")]
 pub mod personal;
 pub mod primitive;
+#[cfg(feature = "text")]
 pub mod text;

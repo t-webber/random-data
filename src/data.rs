@@ -6,7 +6,7 @@ use alloc::fmt;
 use rand::seq::IndexedRandom as _;
 
 macro_rules! strings {
-    ($($fn_module:ident, $fn_variant:ident, $fn_func:ident)*;  $($list_module:ident, $list_variant:ident, $list_const:ident)*) => {
+    ($($fn_module:ident, $fn_feature:literal, $fn_variant:ident, $fn_func:ident)*;  $($list_module:ident, $list_feature:literal, $list_variant:ident, $list_const:ident)*) => {
 
 
             /// Representation of type that can be generated randomly.
@@ -26,22 +26,40 @@ macro_rules! strings {
             /// ```
         #[non_exhaustive]
         #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone)]
-        #[expect(clippy::arbitrary_source_item_ordering, reason="ordered by type")]
+        #[allow(clippy::arbitrary_source_item_ordering, reason="ordered by type")]
         #[expect(missing_docs, reason="macro produced")]
         pub enum DataType {
-            $($fn_variant,)*
-            $($list_variant,)*
+            $(
+                #[cfg(feature = $fn_feature)]
+                $fn_variant,
+            )*
+            $(
+                #[cfg(feature = $list_feature)]
+                $list_variant,
+            )*
         }
 
         impl DataType {
             const STRINGS_LIST: &[&str] = &[
-                $(stringify!($fn_variant),)*
-                $(stringify!($list_variant),)*
+                $(
+                    #[cfg(feature = $fn_feature)]
+                    stringify!($fn_variant),
+                )*
+                $(
+                    #[cfg(feature = $list_feature)]
+                    stringify!($list_variant),
+                )*
             ];
 
             const TYPES_LIST: &[Self] = &[
-                $(Self::$fn_variant,)*
-                $(Self::$list_variant,)*
+                $(
+                    #[cfg(feature = $fn_feature)]
+                    Self::$fn_variant,
+                )*
+                $(
+                    #[cfg(feature = $list_feature)]
+                    Self::$list_variant,
+                )*
             ];
 
 
@@ -58,8 +76,14 @@ macro_rules! strings {
             /// ```
             pub fn random(&self, generator: &mut DataGenerator) -> String {
                 match self {
-                    $( DataType::$fn_variant => crate::data::computational::$fn_module::$fn_func(generator), )*
-                    $( DataType::$list_variant => (crate::data::raw::$list_module::$list_const).choose(generator.rng()).unwrap().to_string(),)*
+                    $(
+                        #[cfg(feature = $fn_feature)]
+                        DataType::$fn_variant => crate::data::computational::$fn_module::$fn_func(generator),
+                    )*
+                    $(
+                        #[cfg(feature = $list_feature)]
+                        DataType::$list_variant => (crate::data::raw::$list_module::$list_const).choose(generator.rng()).unwrap().to_string(),
+                    )*
                 }
             }
 
@@ -85,7 +109,10 @@ macro_rules! strings {
             #[must_use]
             pub const fn values(&self) -> Option<&'static[&'static str]> {
                 match self {
-                    $( Self::$list_variant => Some(&crate::data::raw::$list_module::$list_const),)*
+                    $(
+                        #[cfg(feature = $list_feature)]
+                        Self::$list_variant => Some(&crate::data::raw::$list_module::$list_const),
+                    )*
                         _ => None
                 }
             }
@@ -97,8 +124,14 @@ macro_rules! strings {
 
             fn try_from(value: &str) -> Result<Self, ()> {
                 match value {
-                    $( stringify!($fn_variant) => Ok(Self::$fn_variant), )*
-                    $( stringify!($list_variant) => Ok(Self::$list_variant), )*
+                    $(
+                        #[cfg(feature = $fn_feature)]
+                        stringify!($fn_variant) => Ok(Self::$fn_variant),
+                    )*
+                    $(
+                        #[cfg(feature = $list_feature)]
+                        stringify!($list_variant) => Ok(Self::$list_variant),
+                    )*
                     _ => Err(())
 
                 }
@@ -139,155 +172,155 @@ impl TryFrom<&String> for DataType {
 
 strings!(
 // cd src/data/computational && ls | while read f; do cat $f | grep '^pub fn' | tr '(' ' ' | awk '{print $3}' | sort | while read l; do echo "$f, $(caseify -p "$l"), $l"; done; done
-address, Address, address
-address, FrenchAddress, french_address
-address, FrenchPostCode, french_post_code
-address, FrenchStreet, french_street_name
-address, Latitude, latitude
-address, LatitudeLongitude, latitude_longitude
-address, Longitude, longitude
-address, StreetNumber, street_number
-address, UkAddress, uk_address
-address, UkPostCode, uk_post_code
-colour, HexColour, hex_colour
-colour, HslaColour, hsla_colour
-colour, HslColour, hsl_colour
-colour, RgbaColour, rgba_colour
-colour, RgbColour, rgb_colour
-computer, DirPath, dir_path
-computer, FileName, file_name
-computer, FilePath, file_path
-computer, Ipv4, ipv4
-computer, Ipv6, ipv6
-computer, MacAddress, mac_address
-computer, Semver, semver
-computer, SemverStable, semver_stable
-computer, SemverUnstable, semver_unstable
-finance, Bic, bic
-finance, Iban, iban
-finance, Isin, isin
-isbn, RandomIsbn10, random_isbn10
-isbn, RandomIsbn13, random_isbn13
-people, FamousPerson, famous_person
-personal, CreditCard, credit_card
-personal, Email, email
-personal, FrenchEmail, french_email
-personal, FrenchLicencePlate, french_licence_plate
-personal, FrenchPhoneNumber, french_phone_number
-personal, NhsNumber, nhs_number
-personal, Password, password
-personal, PhoneNumber, phone_number
-personal, SecuriteSociale, securite_sociale
-personal, UkLicencePlate, uk_licence_plate
-personal, UkPhoneNumber, uk_phone_number
-primitive, AlphanumericCapitalChar, alphanumeric_capital_char
-primitive, AlphanumericChar, alphanumeric_char
-primitive, Boolean, boolean
-primitive, CapitalChar, capital_char
-primitive, Digit, digit
-primitive, LowerChar, lower_char
-primitive, Number, number
-text, Sentence, sentence
-text, Paragraph, paragraph
+address, "address", Address, address
+address, "address", FrenchAddress, french_address
+address, "address", FrenchPostCode, french_post_code
+address, "address", FrenchStreet, french_street_name
+address, "address", Latitude, latitude
+address, "address", LatitudeLongitude, latitude_longitude
+address, "address", Longitude, longitude
+address, "address", StreetNumber, street_number
+address, "address", UkAddress, uk_address
+address, "address", UkPostCode, uk_post_code
+colour, "minimal", HexColour, hex_colour
+colour, "minimal", HslaColour, hsla_colour
+colour, "minimal", HslColour, hsl_colour
+colour, "minimal", RgbaColour, rgba_colour
+colour, "minimal", RgbColour, rgb_colour
+computer, "computer", DirPath, dir_path
+computer, "computer", FileName, file_name
+computer, "computer", FilePath, file_path
+computer, "computer", Ipv4, ipv4
+computer, "computer", Ipv6, ipv6
+computer, "computer", MacAddress, mac_address
+computer, "computer", Semver, semver
+computer, "computer", SemverStable, semver_stable
+computer, "computer", SemverUnstable, semver_unstable
+finance, "finance", Bic, bic
+finance, "finance", Iban, iban
+finance, "finance", Isin, isin
+isbn, "minimal", RandomIsbn10, random_isbn10
+isbn, "minimal", RandomIsbn13, random_isbn13
+people, "people", FamousPerson, famous_person
+personal, "personal", CreditCard, credit_card
+personal, "personal", Email, email
+personal, "personal", FrenchEmail, french_email
+personal, "personal", FrenchLicencePlate, french_licence_plate
+personal, "personal", FrenchPhoneNumber, french_phone_number
+personal, "personal", NhsNumber, nhs_number
+personal, "personal", Password, password
+personal, "personal", PhoneNumber, phone_number
+personal, "personal", SecuriteSociale, securite_sociale
+personal, "personal", UkLicencePlate, uk_licence_plate
+personal, "personal", UkPhoneNumber, uk_phone_number
+primitive, "minimal", AlphanumericCapitalChar, alphanumeric_capital_char
+primitive, "minimal", AlphanumericChar, alphanumeric_char
+primitive, "minimal", Boolean, boolean
+primitive, "minimal", CapitalChar, capital_char
+primitive, "minimal", Digit, digit
+primitive, "minimal", LowerChar, lower_char
+primitive, "minimal", Number, number
+text, "text", Sentence, sentence
+text, "text", Paragraph, paragraph
 ;
 // cd src/data/raw && ls | while read f; do cat $f | grep '^pub const' | tr ':' ' ' | awk '{print $3}' | while read l; do echo "$f, $(caseify -p $l), $l" | sed 's/\.rs//;s/\( .*s\), /\1, /'; done  ; done
-art, LiteraryGenre, LITERARY_GENRES
-art, ArchitecturalStyle, ARCHITECTURAL_STYLES
-art, MusicalGenre, MUSICAL_GENRES
-art, MusicalInstrument, MUSICAL_INSTRUMENTS
-colour, ColourName, COLOUR_NAMES
-currency, CurrencyName, CURRENCY_NAMES
-currency, CurrencySymbol, CURRENCY_SYMBOLS
-currency, CurrencyCode, CURRENCY_CODES
-datetime, DaysOfWeek, DAYS_OF_WEEK
-datetime, Month, MONTHS
-datetime, DaysOfWeekAbbr, DAYS_OF_WEEK_ABBR
-datetime, MonthsAbbr, MONTHS_ABBR
-datetime, TimeZone, TIME_ZONES
-datetime, TimeUnit, TIME_UNITS
-datetime, AmPm, AM_PM
-fauna, Animal, ANIMALS
-fauna, Mammal, MAMMALS
-fauna, Bird, BIRDS
-fauna, Insect, INSECTS
-fauna, Fish, FISHES
-fauna, Amphibian, AMPHIBIANS
-fauna, Reptile, REPTILES
-fauna, Mollusc, MOLLUSC
-fauna, AnimalType, ANIMAL_TYPES
-france, FamousFrenchStreet, FRENCH_STREETS
-france, FrenchRoadType, FRENCH_ROAD_TYPES
-france, FrenchCounty, FRENCH_COUNTIES
-france, FrenchRiver, FRENCH_RIVERS
-history, HistoricalBattle, HISTORICAL_BATTLES
-internet, EmailDomain, EMAIL_DOMAINS
-internet, HttpStatusCode, HTTP_STATUS_CODES
-internet, MimeType, MIME_TYPES
-internet, OpenSourceApp, OPEN_SOURCE_APPS
-internet, TopLevelDomain, TOP_LEVEL_DOMAINS
-internet, UserAgent, USER_AGENTS
-mythology, MythologicalCreature, MYTHOLOGICAL_CREATURES
-name, FirstName, FIRST_NAMES
-name, FrenchFirstName, FRENCH_FIRST_NAMES
-name, FrenchLastName, FRENCH_LAST_NAMES
-name, LastName, LAST_NAMES
-name, NameTitle, NAME_TITLES
-people, Painter, PAINTERS
-people, Writer, WRITERS
-people, Composer, COMPOSERS
-people, Mathematician, MATHEMATICIANS
-people, Physician, PHYSICIANS
-people, Biologist, BIOLOGISTS
-people, ComputerScientist, COMPUTER_SCIENTISTS
-people, Philosopher, PHILOSOPHERS
-programming, FileExtension, FILE_EXTENSIONS
-programming, ProgrammingLanguage, PROGRAMMING_LANGUAGES
-programming, ProgrammingParadigm, PROGRAMMING_PARADIGMS
-programming, EditorColourTheme, EDITOR_COLOUR_THEMES
-programming, ItDomain, IT_DOMAINS
-science, ChemicalElement, CHEMICAL_ELEMENTS
-science, MathematicalFunction, MATHEMATICAL_FUNCTIONS
-space, Constellation, CONSTELLATIONS
-space, Planet, PLANETS
-space, Star, STARS
-space, Galaxy, GALAXIES
-sport, Sport, SPORTS
-uk, UkCountyCode, UK_COUNTY_CODES
-uk, UkPostcodeArea, UK_POSTCODE_AREAS
-uk, UkCounty, UK_COUNTIES
-uk, UkCity, UK_CITIES
-uk, UkRoadType, UK_ROAD_TYPES
-uk, UkRiver, UK_RIVERS
-uk, UkStreet, UK_STREETS
-university, SchoolSubject, SCHOOL_SUBJECTS
-university, AcademicDiscipline, ACADEMIC_DISCIPLINES
-university, DegreesTitle, DEGREES_TITLES
-university, University, UNIVERSITIES
-us, UsStateAbbr, US_STATE_ABBR
-us, UsState, US_STATES
-us, UsRoad, US_ROADS
-us, UsRoadType, US_ROAD_TYPES
-weather, CloudType, TYPES_OF_CLOUDS
-words, Word, WORDS
-work, AirDefenseCompanyName, AIR_DEFENSE_COMPANY_NAMES
-work, BioCompanyName, BIO_COMPANY_NAMES
-work, CarBrand, CAR_BRANDS
-work, ClothingCompanyName, CLOTHING_COMPANY_NAMES
-work, CompanyName, COMPANY_NAMES
-work, ConstructionCompanyName, CONSTRUCTION_COMPANY_NAMES
-work, EnergyCompanyName, ENERGY_COMPANY_NAMES
-work, FinanceCompanyName, FINANCE_COMPANY_NAMES
-work, FoodCompanyName, FOOD_COMPANY_NAMES
-work, ItCompanyName, IT_COMPANY_NAMES
-work, Job, JOBS
-work, MediaCompanyName, MEDIA_COMPANY_NAMES
-work, RetailCompanyName, RETAIL_COMPANY_NAMES
-work, TelecomCompanyName, TELECOM_COMPANY_NAMES
-work, TravelCompanyName, TRAVEL_COMPANY_NAMES
-world, Country, COUNTRIES
-world, City, CITIES
-world, Continent, CONTINENTS
-world, CountryCode, COUNTRY_CODES
-world, Street, STREETS
-world, River, RIVERS
+animals, "animals", Animal, ANIMALS
+animals, "animals", Mammal, MAMMALS
+animals, "animals", Bird, BIRDS
+animals, "animals", Insect, INSECTS
+animals, "animals", Fishe, FISHES
+animals, "animals", Amphibian, AMPHIBIANS
+animals, "animals", Reptile, REPTILES
+animals, "animals", Mollusc, MOLLUSC
+animals, "animals", AnimalType, ANIMAL_TYPES
+animals, "animals", MythologicalCreature, MYTHOLOGICAL_CREATURES
+art, "art", LiteraryGenre, LITERARY_GENRES
+art, "art", ArchitecturalStyle, ARCHITECTURAL_STYLES
+art, "art", MusicalGenre, MUSICAL_GENRES
+art, "art", MusicalInstrument, MUSICAL_INSTRUMENTS
+colours, "colours", ColourName, COLOUR_NAMES
+currencies, "currencies", CurrencyName, CURRENCY_NAMES
+currencies, "currencies", CurrencySymbol, CURRENCY_SYMBOLS
+currencies, "currencies", CurrencyCode, CURRENCY_CODES
+datetime, "datetime", DaysOfWeek, DAYS_OF_WEEK
+datetime, "datetime", Month, MONTHS
+datetime, "datetime", DaysOfWeekAbbr, DAYS_OF_WEEK_ABBR
+datetime, "datetime", MonthsAbbr, MONTHS_ABBR
+datetime, "datetime", TimeZone, TIME_ZONES
+datetime, "datetime", TimeUnit, TIME_UNITS
+datetime, "datetime", AmPm, AM_PM
+education, "education", SchoolSubject, SCHOOL_SUBJECTS
+education, "education", AcademicDiscipline, ACADEMIC_DISCIPLINES
+education, "education", DegreesTitle, DEGREES_TITLES
+education, "education", University, UNIVERSITIES
+education, "education", Sport, SPORTS
+france, "france", FamousFrenchStreet, FRENCH_STREETS
+france, "france", FrenchRoadType, FRENCH_ROAD_TYPES
+france, "france", FrenchCounty, FRENCH_COUNTIES
+france, "france", FrenchRiver, FRENCH_RIVERS
+history, "history", HistoricalBattle, HISTORICAL_BATTLES
+internet, "internet", EmailDomain, EMAIL_DOMAINS
+internet, "internet", OpenSourceApp, OPEN_SOURCE_APPS
+internet, "internet", TopLevelDomain, TOP_LEVEL_DOMAINS
+internet, "internet", UserAgent, USER_AGENTS
+internet, "internet", HttpStatusCode, HTTP_STATUS_CODES
+internet, "internet", MimeType, MIME_TYPES
+names, "names", NameTitle, NAME_TITLES
+names, "names", FirstName, FIRST_NAMES
+names, "names", FrenchFirstName, FRENCH_FIRST_NAMES
+names, "names", FrenchLastName, FRENCH_LAST_NAMES
+names, "names", LastName, LAST_NAMES
+people, "people", Painter, PAINTERS
+people, "people", Writer, WRITERS
+people, "people", Composer, COMPOSERS
+people, "people", Mathematician, MATHEMATICIANS
+people, "people", Physician, PHYSICIANS
+people, "people", Biologist, BIOLOGISTS
+people, "people", ComputerScientist, COMPUTER_SCIENTISTS
+people, "people", Philosopher, PHILOSOPHERS
+computer, "computer", ProgrammingLanguage, PROGRAMMING_LANGUAGES
+computer, "computer", ProgrammingParadigm, PROGRAMMING_PARADIGMS
+computer, "computer", EditorColourTheme, EDITOR_COLOUR_THEMES
+computer, "computer", ItDomain, IT_DOMAINS
+computer, "computer", FileExtension, FILE_EXTENSIONS
+science, "science", ChemicalElement, CHEMICAL_ELEMENTS
+science, "science", MathematicalFunction, MATHEMATICAL_FUNCTIONS
+sky_space, "sky_space", TypesOfCloud, TYPES_OF_CLOUDS
+sky_space, "sky_space", Constellation, CONSTELLATIONS
+sky_space, "sky_space", Planet, PLANETS
+sky_space, "sky_space", Star, STARS
+sky_space, "sky_space", Galaxy, GALAXIES
+uk, "uk", UkCountyCode, UK_COUNTY_CODES
+uk, "uk", UkPostcodeArea, UK_POSTCODE_AREAS
+uk, "uk", UkCounty, UK_COUNTIES
+uk, "uk", UkCity, UK_CITIES
+uk, "uk", UkRoadType, UK_ROAD_TYPES
+uk, "uk", UkRiver, UK_RIVERS
+uk, "uk", UkStreet, UK_STREETS
+us, "us", UsStateAbbr, US_STATE_ABBR
+us, "us", UsState, US_STATES
+us, "us", UsRoad, US_ROADS
+us, "us", UsRoadType, US_ROAD_TYPES
+text, "text", Word, WORDS
+work, "work", Job, JOBS
+work, "work", CompanyName, COMPANY_NAMES
+work, "work", ItCompanyName, IT_COMPANY_NAMES
+work, "work", EnergyCompanyName, ENERGY_COMPANY_NAMES
+work, "work", FinanceCompanyName, FINANCE_COMPANY_NAMES
+work, "work", RetailCompanyName, RETAIL_COMPANY_NAMES
+work, "work", FoodCompanyName, FOOD_COMPANY_NAMES
+work, "work", TravelCompanyName, TRAVEL_COMPANY_NAMES
+work, "work", ConstructionCompanyName, CONSTRUCTION_COMPANY_NAMES
+work, "work", MediaCompanyName, MEDIA_COMPANY_NAMES
+work, "work", TelecomCompanyName, TELECOM_COMPANY_NAMES
+work, "work", BioCompanyName, BIO_COMPANY_NAMES
+work, "work", CarBrand, CAR_BRANDS
+work, "work", AirDefenseCompanyName, AIR_DEFENSE_COMPANY_NAMES
+work, "work", ClothingCompanyName, CLOTHING_COMPANY_NAMES
+world, "world", Country, COUNTRIES
+world, "world", City, CITIES
+world, "world", Continent, CONTINENTS
+world, "world", CountryCode, COUNTRY_CODES
+world, "world", Street, STREETS
+world, "world", River, RIVERS
 );

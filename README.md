@@ -117,3 +117,5 @@ let french_phone = DataType::FrenchPhoneNumber.random(&mut generator);
 - **Banks & finance**: Bic, Iban, Isin, CurrencyName, CurrencySymbol, CurrencyCode
 - **Text**: Word, Sentence, Paragraph
 - **Sky & space**: Constellation, Planet, Star, Galaxy, CloudType
+
+> If you don't want all the data to be loaded in your binary, you can use the feature flags to disable those you don't want.

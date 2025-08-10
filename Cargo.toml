@@ -22,3 +22,52 @@ categories = ["data-generation", "randomness", "utilities"]
 
 [dependencies]
 rand = "0.9.2"
+
+[features]
+default = [
+  "minimal",
+  "animals",
+  "art",
+  "colours",
+  "currencies",
+  "datetime",
+  "education",
+  "france",
+  "history",
+  "internet",
+  "names",
+  "people",
+  "personal",
+  "computer",
+  "address",
+  "science",
+  "sky_space",
+  "uk",
+  "us",
+  "text",
+  "work",
+  "world",
+]
+animals = []
+art = []
+colours = []
+currencies = []
+datetime = []
+education = []
+france = []
+history = []
+internet = []
+names = []
+people = []
+computer = ["text"]
+science = []
+sky_space = []
+uk = []
+us = []
+text = []
+work = []
+world = []
+minimal = []
+finance = ["world"]
+address = ["people"]
+personal = ["names", "computer"]
