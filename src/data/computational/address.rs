@@ -74,7 +74,7 @@ pub fn latitude_longitude(generator: &mut DataGenerator) -> String {
 pub fn street_number(generator: &mut DataGenerator) -> String {
     format!(
         "{}{}",
-        generator.rng().random_range(0..500),
+        generator.rng().random_range(0..1000),
         if generator.rng().random_bool(0.2) {
             if generator.rng().random_bool(0.4) {
                 " ter"

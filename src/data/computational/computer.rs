@@ -83,7 +83,7 @@ pub fn ipv6(generator: &mut DataGenerator) -> String {
 
 #[allow(clippy::unwrap_used, reason = "non empty, sum non zero, no overflow")]
 pub fn dir_path(generator: &mut DataGenerator) -> String {
-    let weights = [5u32, 10, 15, 20, 25, 25];
+    let weights = [1u32, 10, 100, 1000, 1000, 1000];
     let dist = WeightedIndex::new(weights).unwrap();
     let len = dist.sample(generator.rng());
 
