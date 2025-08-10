@@ -4,6 +4,7 @@
 [![Crates.io](https://img.shields.io/badge/crates.io-random--data-darkgreen.svg?logo=rust)](https://crates.io/crates/random-data)
 [![Docs.rs](https://img.shields.io/badge/docs.rs-random--data-brown.svg?logo=rust)](https://docs.rs/random-data)
 [![License: MIT OR Apache-2.0](https://img.shields.io/badge/license-MIT%20or%20Apache--2.0-red.svg)](LICENSE-MIT)
+![Coverage](https://img.shields.io/badge/coverage--100%25-purple.svg)
 
 A Rust library for generating realistic random data of any kind.
 

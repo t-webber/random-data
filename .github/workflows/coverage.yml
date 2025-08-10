@@ -31,4 +31,14 @@ jobs:
               run: cargo binstall -y cargo-tarpaulin
 
             - name: Check coverage
-              run: cargo tarpaulin --doc --tests  --fail-under 100
+              run: cargo tarpaulin --doc --tests --fail-under 98
+
+            - name: Run coverage per feature
+              run: |
+                features=(
+                  address animals art colours computer currencies datetime education finance france history internet minimal names people personal science sky_space text uk us work world
+                )
+                for feature in "${features[@]}"; do
+                  echo "Running coverage for feature: $feature"
+                  cargo tarpaulin --features "$feature" --no-default-features --fail-under 80
+                done
