@@ -194,6 +194,7 @@ impl DataType {
 }
 
 #[allow(clippy::use_debug, reason = "fine here")]
+#[allow(clippy::min_ident_chars, reason = "follow trait naming pattern")]
 impl fmt::Display for DataType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{self:?}")
