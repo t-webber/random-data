@@ -23,35 +23,33 @@ cargo add random-data
 ```rust
 use random_data::{DataType, DataGenerator};
 
-fn main() {
-    let mut generator = DataGenerator::default();
+let mut generator = DataGenerator::default();
 
-    // Generate a random address
-    let address = DataType::Address.random(&mut generator);
-    println!("Address: {address}");
+// Generate a random address
+let address = DataType::Address.random(&mut generator);
+println!("Address: {address}");
 
-    // Generate a random name
-    let name = DataType::FirstName.random(&mut generator);
-    println!("Name: {name}");
+// Generate a random name
+let name = DataType::FirstName.random(&mut generator);
+println!("Name: {name}");
 
-    // Generate a random email
-    let email = DataType::Email.random(&mut generator);
-    println!("Email: {email}");
+// Generate a random email
+let email = DataType::Email.random(&mut generator);
+println!("Email: {email}");
 
-    // Generate location data
-    let country = DataType::Country.random(&mut generator);
-    let coordinates = DataType::LatitudeLongitude.random(&mut generator);
-    println!("Location: {country} at {coordinates}");
+// Generate location data
+let country = DataType::Country.random(&mut generator);
+let coordinates = DataType::LatitudeLongitude.random(&mut generator);
+println!("Location: {country} at {coordinates}");
 
-    // Generate technical data
-    let ip = DataType::Ipv4.random(&mut generator);
-    let mac = DataType::MacAddress.random(&mut generator);
-    println!("Network: IP {ip} MAC {mac}");
+// Generate technical data
+let ip = DataType::Ipv4.random(&mut generator);
+let mac = DataType::MacAddress.random(&mut generator);
+println!("Network: IP {ip} MAC {mac}");
 
-    // List all the possible data types
-    let list = DataType::list_str();
-    println!("Possible data types: {list:?}");
-}
+// List all the possible data types
+let list = DataType::list_str();
+println!("Possible data types: {list:?}");
 ```
 
 ## Checking Available Values
@@ -99,24 +97,24 @@ let french_phone = DataType::FrenchPhoneNumber.random(&mut generator);
 
 ## Available Data Types
 
-- **Internet**: EmailDomain, HttpStatusCode, MimeType, OpenSourceApp, TopLevelDomain, UserAgent, Ipv4, Ipv6, MacAddress
-- **Companies**: CarBrand, CompanyName, Job
-- **Computer science**: FileExtension, ProgrammingLanguage, ProgrammingParadigm, EditorColourTheme, ItDomain, DirPath, FileName, FilePath, Semver, SemverStable, SemverUnstable
-- **Famous people**: Painter, Writer, Composer, Mathematician, Physician, Biologist, ComputerScientist, Philosopher
-- **Colours**: HexColour, HslaColour, HslColour, RgbaColour, RgbColour, ColourName
-- **Geography**: Latitude, LatitudeLongitude, Longitude, FrenchRiver, Country, City, Continent, CountryCode, Street, River, UkRiver
-- **Addresses**: Address, FrenchAddress, FrenchPostCode, UkAddress, UkPostCode, FrenchStreet, FrenchRoadType, FrenchCounty, UsStateAbbr, UsState, UsRoads, UsRoadTypes, UkCountyCode, UkPostcodeArea, UkCounty, UkCity, UkRoadType, UkStreet, StreetNumber
-- **Science**: ChemicalElement, MathematicalFunction
-- **Names**: FirstName, FrenchFirstName, FrenchLastName, LastName, NameTitle
-- **Arts**: LiteraryGenre, ArchitecturalStyle, MusicalGenre, MusicalInstrument
-- **Time**: DaysOfWeek, Month, DaysOfWeekAbbr, MonthsAbbr, TimeZone, TimeUnit, AmPm
-- **Animals**: Animal, Mammal, Bird, Insect, MythologicalCreature, Fish, Amphibian, Reptile, Mollusc, AnimalType
-- **Education**: SchoolSubject, AcademicDiscipline, DegreesTitle, University, HistoricalBattle, Sport
-- **Primitives**: AlphanumericCapitalChar, AlphanumericChar, Boolean, CapitalChar, Digit, LowerChar
-- **Personal data**: CreditCard, Email, FrenchEmail, FrenchLicencePlate, FrenchPhoneNumber, NhsNumber, Password, PhoneNumber, SecuriteSociale, UkLicencePlate, UkPhoneNumber
-- **ISBNs**: RandomIsbn10, RandomIsbn13
-- **Banks & finance**: Bic, Iban, Isin, CurrencyName, CurrencySymbol, CurrencyCode
-- **Text**: Word, Sentence, Paragraph
-- **Sky & space**: Constellation, Planet, Star, Galaxy, CloudType
+- **Internet**: `EmailDomain`, `HttpStatusCode`, `MimeType`, `OpenSourceApp`, `TopLevelDomain`, `UserAgent`, `Ipv4`, `Ipv6`, `MacAddress`
+- **Companies**: `CarBrand`, `CompanyName`, `Job`
+- **Computer science**: `FileExtension`, `ProgrammingLanguage`, `ProgrammingParadigm`, `EditorColourTheme`, `ItDomain`, `DirPath`, `FileName`, `FilePath`, `Semver`, `SemverStable`, `SemverUnstable`
+- **Famous people**: `Painter`, `Writer`, `Composer`, `Mathematician`, `Physician`, `Biologist`, `ComputerScientist`, `Philosopher`
+- **Colours**: `HexColour`, `HslaColour`, `HslColour`, `RgbaColour`, `RgbColour`, `ColourName`
+- **Geography**: `Latitude`, `LatitudeLongitude`, `Longitude`, `FrenchRiver`, `Country`, `City`, `Continent`, `CountryCode`, `Street`, `River`, `UkRiver`
+- **Addresses**: `Address`, `FrenchAddress`, `FrenchPostCode`, `UkAddress`, `UkPostCode`, `FrenchStreet`, `FrenchRoadType`, `FrenchCounty`, `UsStateAbbr`, `UsState`, `UsRoads`, `UsRoadTypes`, `UkCountyCode`, `UkPostcodeArea`, `UkCounty`, `UkCity`, `UkRoadType`, `UkStreet`, `StreetNumber`
+- **Science**: `ChemicalElement`, `MathematicalFunction`
+- **Names**: `FirstName`, `FrenchFirstName`, `FrenchLastName`, `LastName`, `NameTitle`
+- **Arts**: `LiteraryGenre`, `ArchitecturalStyle`, `MusicalGenre`, `MusicalInstrument`
+- **Time**: `DaysOfWeek`, `Month`, `DaysOfWeekAbbr`, `MonthsAbbr`, `TimeZone`, `TimeUnit`, `AmPm`
+- **Animals**: `Animal`, `Mammal`, `Bird`, `Insect`, `MythologicalCreature`, `Fish`, `Amphibian`, `Reptile`, `Mollusc`, `AnimalType`
+- **Education**: `SchoolSubject`, `AcademicDiscipline`, `DegreesTitle`, `University`, `HistoricalBattle`, `Sport`
+- **Primitives**: `AlphanumericCapitalChar`, `AlphanumericChar`, `Boolean`, `CapitalChar`, `Digit`, `LowerChar`
+- **Personal data**: `CreditCard`, `Email`, `FrenchEmail`, `FrenchLicencePlate`, `FrenchPhoneNumber`, `NhsNumber`, `Password`, `PhoneNumber`, `SecuriteSociale`, `UkLicencePlate`, `UkPhoneNumber`
+- **ISBNs**: `RandomIsbn10`, `RandomIsbn13`
+- **Banks & finance**: `Bic`, `Iban`, `Isin`, `CurrencyName`, `CurrencySymbol`, `CurrencyCode`
+- **Text**: `Word`, `Sentence`, `Paragraph`
+- **Sky & space**: `Constellation`, `Planet`, `Star`, `Galaxy`, `CloudType`
 
 > If you don't want all the data to be loaded in your binary, you can use the feature flags to disable those you don't want.

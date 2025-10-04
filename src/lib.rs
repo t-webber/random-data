@@ -1,5 +1,5 @@
 #![doc = include_str!("../README.md")]
-#![warn(
+#![deny(
     bindings_with_variant_name,
     non_snake_case,
     missing_docs,
@@ -29,6 +29,7 @@
     clippy::allow_attributes,
     reason = "features can make lint unfulfilled"
 )]
+#![expect(clippy::doc_include_without_cfg, reason = "see issue #13918")]
 #![allow(clippy::blanket_clippy_restriction_lints, reason = "enable all lints")]
 #![allow(clippy::missing_docs_in_private_items, reason = "explicit names")]
 #![allow(clippy::non_ascii_literal, reason = "not-understandable")]
@@ -55,3 +56,4 @@ mod generator;
 mod primitives;
 
 pub use crate::{data::DataType, generator::DataGenerator};
+pub use rand;
