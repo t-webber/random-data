@@ -1,6 +1,6 @@
 [package]
 name = "random-data"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 description = "A library tool to generate random data of any kind."
 license = "MIT OR Apache-2.0"
