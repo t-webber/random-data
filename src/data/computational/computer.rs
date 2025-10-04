@@ -1,12 +1,12 @@
 use rand::{
-    Rng as _,
+    Rng as _, RngCore,
     distr::{Distribution as _, weighted::WeightedIndex},
     seq::IndexedRandom as _,
 };
 
 use crate::{DataGenerator, DataType};
 
-pub fn semver(generator: &mut DataGenerator) -> String {
+pub fn semver<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     if generator.rng().random_bool(0.8) {
         DataType::SemverStable.random(generator)
     } else {
@@ -14,7 +14,7 @@ pub fn semver(generator: &mut DataGenerator) -> String {
     }
 }
 
-pub fn semver_stable(generator: &mut DataGenerator) -> String {
+pub fn semver_stable<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     format!(
         "{}.{}.{}",
         generator.rng().random_range(0..20),
@@ -24,7 +24,7 @@ pub fn semver_stable(generator: &mut DataGenerator) -> String {
 }
 
 #[allow(clippy::unwrap_used, reason = "array not empty")]
-pub fn semver_unstable(generator: &mut DataGenerator) -> String {
+pub fn semver_unstable<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     format!(
         "{}-{}{}",
         DataType::SemverStable.random(generator),
@@ -39,7 +39,7 @@ pub fn semver_unstable(generator: &mut DataGenerator) -> String {
     )
 }
 
-pub fn mac_address(generator: &mut DataGenerator) -> String {
+pub fn mac_address<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     format!(
         "{:X}{:X}:{:X}{:X}:{:X}{:X}:{:X}{:X}:{:X}{:X}:{:X}{:X}",
         generator.rng().random_range(0..16),
@@ -57,7 +57,7 @@ pub fn mac_address(generator: &mut DataGenerator) -> String {
     )
 }
 
-pub fn ipv4(generator: &mut DataGenerator) -> String {
+pub fn ipv4<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     format!(
         "{}.{}.{}.{}",
         generator.rng().random_range(0..=255),
@@ -67,7 +67,7 @@ pub fn ipv4(generator: &mut DataGenerator) -> String {
     )
 }
 
-pub fn ipv6(generator: &mut DataGenerator) -> String {
+pub fn ipv6<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     format!(
         "{:X}:{:X}:{:X}:{:X}:{:X}:{:X}:{:X}:{:X}",
         generator.rng().random_range(0..=0xffff),
@@ -82,7 +82,7 @@ pub fn ipv6(generator: &mut DataGenerator) -> String {
 }
 
 #[allow(clippy::unwrap_used, reason = "non empty, sum non zero, no overflow")]
-pub fn dir_path(generator: &mut DataGenerator) -> String {
+pub fn dir_path<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     let weights = [1u32, 10, 100, 1000, 1000, 1000];
     let dist = WeightedIndex::new(weights).unwrap();
     let len = dist.sample(generator.rng());
@@ -95,7 +95,7 @@ pub fn dir_path(generator: &mut DataGenerator) -> String {
     output
 }
 
-pub fn file_name(generator: &mut DataGenerator) -> String {
+pub fn file_name<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     format!(
         "{}.{}",
         DataType::Word.random(generator),
@@ -103,7 +103,7 @@ pub fn file_name(generator: &mut DataGenerator) -> String {
     )
 }
 
-pub fn file_path(generator: &mut DataGenerator) -> String {
+pub fn file_path<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     format!(
         "{}{}",
         DataType::DirPath.random(generator),

@@ -87,3 +87,47 @@ fn random() {
         );
     }
 }
+
+#[test]
+fn different() {
+    let mut generator0 = DataGenerator::default();
+    let mut generator1 = DataGenerator::default();
+
+    if DataType::list().len() <= 10 {
+        return;
+    }
+
+    let values0 = DataType::list()
+        .iter()
+        .map(|data_type| data_type.random(&mut generator0))
+        .take(10)
+        .collect::<Vec<_>>();
+
+    let values1 = DataType::list()
+        .iter()
+        .map(|data_type| data_type.random(&mut generator1))
+        .take(10)
+        .collect::<Vec<_>>();
+
+    assert_ne!(values0, values1);
+}
+
+#[test]
+fn seed() {
+    let mut generator0 = DataGenerator::new_with_seed(287201);
+    let mut generator1 = DataGenerator::new_with_seed(287201);
+
+    let values0 = DataType::list()
+        .iter()
+        .map(|data_type| data_type.random(&mut generator0))
+        .take(20)
+        .collect::<Vec<_>>();
+
+    let values1 = DataType::list()
+        .iter()
+        .map(|data_type| data_type.random(&mut generator1))
+        .take(20)
+        .collect::<Vec<_>>();
+
+    assert_eq!(values0, values1);
+}

@@ -1,17 +1,17 @@
 use core::iter::repeat_with;
 
-use rand::Rng as _;
+use rand::{Rng as _, RngCore};
 
 use crate::{DataGenerator, DataType, primitives::capital_char};
 
-pub fn phone_number(generator: &mut DataGenerator) -> String {
+pub fn phone_number<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     generator
         .rng()
         .random_range(1_000_000u64..=999_999_999_999_999)
         .to_string()
 }
 
-pub fn uk_phone_number(generator: &mut DataGenerator) -> String {
+pub fn uk_phone_number<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     format!(
         "44{}",
         generator
@@ -20,14 +20,14 @@ pub fn uk_phone_number(generator: &mut DataGenerator) -> String {
     )
 }
 
-pub fn french_phone_number(generator: &mut DataGenerator) -> String {
+pub fn french_phone_number<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     format!(
         "33{}",
         generator.rng().random_range(100_000_000u64..=999_999_999)
     )
 }
 
-pub fn email(generator: &mut DataGenerator) -> String {
+pub fn email<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     format!(
         "{}.{}@{}",
         DataType::FirstName.random(generator),
@@ -36,7 +36,7 @@ pub fn email(generator: &mut DataGenerator) -> String {
     )
 }
 
-pub fn french_email(generator: &mut DataGenerator) -> String {
+pub fn french_email<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     format!(
         "{}.{}@{}",
         DataType::FrenchFirstName.random(generator),
@@ -51,7 +51,7 @@ pub fn french_email(generator: &mut DataGenerator) -> String {
     clippy::cast_possible_wrap,
     reason = "number is small"
 )]
-pub fn nhs_number(generator: &mut DataGenerator) -> String {
+pub fn nhs_number<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     let digits: Vec<i32> = repeat_with(|| generator.rng().random_range(0i32..=9i32))
         .take(8)
         .collect();
@@ -79,7 +79,7 @@ pub fn nhs_number(generator: &mut DataGenerator) -> String {
 }
 
 #[allow(clippy::unwrap_used, reason = "it's a valid number")]
-pub fn securite_sociale(generator: &mut DataGenerator) -> String {
+pub fn securite_sociale<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     let rng = generator.rng();
     let nir = format!(
         "{}{:02}{:02}{:02}{:03}{:03}",
@@ -95,7 +95,7 @@ pub fn securite_sociale(generator: &mut DataGenerator) -> String {
     format!("{nir}{key}")
 }
 
-pub fn password(generator: &mut DataGenerator) -> String {
+pub fn password<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     let mut output = String::new();
     let len = generator.rng().random_range(10..20);
     for _ in 0u32..len {
@@ -104,7 +104,7 @@ pub fn password(generator: &mut DataGenerator) -> String {
     output
 }
 
-pub fn credit_card(generator: &mut DataGenerator) -> String {
+pub fn credit_card<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     let len = generator.rng().random_range(12..19);
     let mut output = String::new();
     let mut checksum = 0i32;
@@ -122,7 +122,7 @@ pub fn credit_card(generator: &mut DataGenerator) -> String {
     output
 }
 
-pub fn french_licence_plate(generator: &mut DataGenerator) -> String {
+pub fn french_licence_plate<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     format!(
         "{}{}-{}{}{}-{}{}",
         capital_char(generator.rng()),
@@ -135,7 +135,7 @@ pub fn french_licence_plate(generator: &mut DataGenerator) -> String {
     )
 }
 
-pub fn uk_licence_plate(generator: &mut DataGenerator) -> String {
+pub fn uk_licence_plate<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     let range = if generator.rng().random_bool(0.5) {
         1..25
     } else {

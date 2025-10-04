@@ -1,9 +1,9 @@
-use rand::Rng as _;
+use rand::{Rng as _, RngCore};
 
 use crate::{DataGenerator, DataType};
 
 #[allow(clippy::unwrap_used, reason = "tests assure the first element exists")]
-fn push_first_word(generator: &mut DataGenerator, output: &mut String) {
+fn push_first_word<Rng: RngCore>(generator: &mut DataGenerator<Rng>, output: &mut String) {
     let first_word = DataType::Word.random(generator);
     let mut chars = first_word.chars();
     for ch in chars.next().unwrap().to_uppercase() {
@@ -15,7 +15,7 @@ fn push_first_word(generator: &mut DataGenerator, output: &mut String) {
     output.push(' ');
 }
 
-pub fn sentence(generator: &mut DataGenerator) -> String {
+pub fn sentence<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     let mut output = String::new();
     let len = generator.rng().random_range(10..20);
     push_first_word(generator, &mut output);
@@ -34,7 +34,7 @@ pub fn sentence(generator: &mut DataGenerator) -> String {
     output
 }
 
-pub fn paragraph(generator: &mut DataGenerator) -> String {
+pub fn paragraph<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     let mut output = String::new();
     let len = generator.rng().random_range(5..10);
     for _ in 0u32..len {

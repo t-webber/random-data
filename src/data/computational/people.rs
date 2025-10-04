@@ -1,9 +1,10 @@
+use rand::RngCore;
 use rand::seq::IndexedRandom as _;
 
 use crate::{DataGenerator, DataType};
 
 #[allow(clippy::unwrap_used, reason = "array not empty")]
-pub fn famous_person(generator: &mut DataGenerator) -> String {
+pub fn famous_person<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     [
         DataType::Painter,
         DataType::Writer,

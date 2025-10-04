@@ -1,4 +1,4 @@
-use rand::Rng as _;
+use rand::{Rng as _, RngCore};
 
 use crate::DataGenerator;
 
@@ -8,7 +8,7 @@ use crate::DataGenerator;
     clippy::unwrap_used,
     reason = "small enough"
 )]
-pub fn random_isbn10(generator: &mut DataGenerator) -> String {
+pub fn random_isbn10<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     let mut isbn = Vec::with_capacity(10);
     for _ in 0..9u32 {
         isbn.push(generator.rng().random_range(0usize..=9));
@@ -39,7 +39,7 @@ pub fn random_isbn10(generator: &mut DataGenerator) -> String {
 }
 
 #[allow(clippy::indexing_slicing, reason = "index in bounds")]
-pub fn random_isbn13(generator: &mut DataGenerator) -> String {
+pub fn random_isbn13<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     let mut isbn = Vec::with_capacity(12);
     isbn.push(9);
     isbn.push(7);

@@ -1,8 +1,9 @@
+use rand::RngCore;
 use rand::{Rng as _, seq::IndexedRandom as _};
 
 use crate::{DataGenerator, DataType, primitives::capital_char};
 
-pub fn isin(generator: &mut DataGenerator) -> String {
+pub fn isin<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     format!(
         "{}{:010}",
         DataType::CountryCode.random(generator),
@@ -10,7 +11,7 @@ pub fn isin(generator: &mut DataGenerator) -> String {
     )
 }
 
-pub fn bic(generator: &mut DataGenerator) -> String {
+pub fn bic<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     format!(
         "{}{}{}{}{country}{}{}{branch}",
         capital_char(generator.rng()),
@@ -34,7 +35,7 @@ pub fn bic(generator: &mut DataGenerator) -> String {
 }
 
 #[allow(clippy::unwrap_used, reason = "non empty string")]
-pub fn iban(generator: &mut DataGenerator) -> String {
+pub fn iban<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     let mut output = DataType::CountryCode.random(generator);
     for _ in 0..26u8 {
         output.push(

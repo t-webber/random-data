@@ -3,6 +3,7 @@ mod raw;
 extern crate alloc;
 use crate::generator::DataGenerator;
 use alloc::fmt;
+use rand::RngCore;
 
 #[allow(unused_imports, reason = "minimal feature doesn't use this")]
 use rand::seq::IndexedRandom as _;
@@ -89,7 +90,7 @@ macro_rules! strings {
             ///     println!("{random_address}");
             /// }
             /// ```
-            pub fn random(&self, generator: &mut DataGenerator) -> String {
+            pub fn random<Rng: RngCore>(&self, generator: &mut DataGenerator<Rng>) -> String {
                 match self {
                     $(
                         #[cfg(feature = $fn_feature)]

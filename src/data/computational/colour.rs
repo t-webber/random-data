@@ -1,8 +1,8 @@
-use rand::Rng as _;
-
 use crate::DataGenerator;
+use rand::Rng as _;
+use rand::RngCore;
 
-pub fn hex_colour(generator: &mut DataGenerator) -> String {
+pub fn hex_colour<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     format!(
         "#{:X}{:X}{:X}{:X}{:X}{:X}",
         generator.rng().random_range(0..16),
@@ -14,7 +14,7 @@ pub fn hex_colour(generator: &mut DataGenerator) -> String {
     )
 }
 
-pub fn rgb_colour(generator: &mut DataGenerator) -> String {
+pub fn rgb_colour<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     format!(
         "rgb({}, {}, {})",
         generator.rng().random_range(0..256),
@@ -23,7 +23,7 @@ pub fn rgb_colour(generator: &mut DataGenerator) -> String {
     )
 }
 
-pub fn rgba_colour(generator: &mut DataGenerator) -> String {
+pub fn rgba_colour<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     format!(
         "rgb({}, {}, {}, {})",
         generator.rng().random_range(0..256),
@@ -33,7 +33,7 @@ pub fn rgba_colour(generator: &mut DataGenerator) -> String {
     )
 }
 
-pub fn hsl_colour(generator: &mut DataGenerator) -> String {
+pub fn hsl_colour<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     format!(
         "hsl({}, {}%, {}%)",
         generator.rng().random_range(0..360),
@@ -42,7 +42,7 @@ pub fn hsl_colour(generator: &mut DataGenerator) -> String {
     )
 }
 
-pub fn hsla_colour(generator: &mut DataGenerator) -> String {
+pub fn hsla_colour<Rng: RngCore>(generator: &mut DataGenerator<Rng>) -> String {
     format!(
         "hsl({}, {}%, {}%, {})",
         generator.rng().random_range(0..360),
