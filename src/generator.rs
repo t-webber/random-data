@@ -5,13 +5,6 @@ use rand::rngs::ThreadRng;
 pub struct DataGenerator(ThreadRng);
 
 impl DataGenerator {
-    #[inline]
-    #[must_use]
-    /// Create a [`DataGenerator`] instance.
-    pub fn new() -> Self {
-        Self::default()
-    }
-
     pub(crate) const fn rng(&mut self) -> &mut ThreadRng {
         &mut self.0
     }

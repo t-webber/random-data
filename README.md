@@ -24,7 +24,7 @@ cargo add random-data
 use random_data::{DataType, DataGenerator};
 
 fn main() {
-    let mut generator = DataGenerator::new();
+    let mut generator = DataGenerator::default();
 
     // Generate a random address
     let address = DataType::Address.random(&mut generator);
@@ -61,7 +61,7 @@ Some data types have predefined lists of values. You can access these lists:
 ```rust
 use random_data::{DataGenerator, DataType};
 
-let mut generator = DataGenerator::new();
+let mut generator = DataGenerator::default();
 
 // Check if a data type has a predefined list
 if let Some(values) = DataType::Month.values() {
@@ -84,7 +84,7 @@ The library includes region-specific generators:
 ```rust
 use random_data::{DataGenerator, DataType};
 
-let mut generator = DataGenerator::new();
+let mut generator = DataGenerator::default();
 
 // UK-specific data
 let uk_address = DataType::UkAddress.random(&mut generator);

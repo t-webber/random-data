@@ -22,7 +22,7 @@ fn list() {
 
 #[test]
 fn non_empty() {
-    let mut generator = DataGenerator::new();
+    let mut generator = DataGenerator::default();
     let list = dbg!(DataType::list());
     for data_type in list {
         for _ in 0..1000 {
@@ -71,15 +71,13 @@ fn len(data_type: &DataType) -> Option<usize> {
 
 #[test]
 fn random() {
-    let mut generator = DataGenerator::new();
+    let mut generator = DataGenerator::default();
     let list = DataType::list();
     for data_type in list {
         let mut set = HashSet::new();
         for _ in 0..100 {
             let data = data_type.random(&mut generator);
-            if !set.insert(data.clone()) {
-                //                 println!("{data}");
-            }
+            set.insert(data.clone());
         }
         let expected = len(data_type).map_or_else(|| 70, |len| (len / 4).min(70));
         assert!(

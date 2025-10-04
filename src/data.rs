@@ -22,7 +22,7 @@ macro_rules! strings {
         ///
         /// ```
         /// use random_data::*;
-        /// let mut generator = DataGenerator::new();
+        /// let mut generator = DataGenerator::default();
         ///
         /// #[cfg(feature = "datetime")]
         /// {
@@ -81,7 +81,7 @@ macro_rules! strings {
             ///
             /// ```
             /// use random_data::*;
-            /// let mut generator = DataGenerator::new();
+            /// let mut generator = DataGenerator::default();
             ///
             /// #[cfg(feature = "science")]
             /// {
@@ -113,7 +113,7 @@ macro_rules! strings {
             ///
             /// ```
             /// use random_data::*;
-            /// let mut generator = DataGenerator::new();
+            /// let mut generator = DataGenerator::default();
             ///
             /// #[cfg(feature = "people")]
             /// {
