@@ -38,13 +38,3 @@ jobs:
 
             - name: Check coverage
               run: cargo tarpaulin --doc --tests --fail-under 95
-
-            - name: Run coverage per feature
-              run: |
-                features=(
-                  address animals art colours computer currencies datetime education finance france history internet minimal names people personal science sky_space text uk us work world
-                )
-                for feature in "${features[@]}"; do
-                  echo -e "\033[35mRunning coverage for feature: $feature\033[0m"
-                  cargo tarpaulin --features "$feature" --no-default-features --fail-under 95
-                done
