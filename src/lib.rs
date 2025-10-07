@@ -55,5 +55,7 @@ mod data;
 mod generator;
 mod primitives;
 
-pub use crate::{data::DataType, generator::DataGenerator};
+pub use crate::data::DataType;
+pub use generator::DataGenerator;
 pub use rand;
+pub use rand_chacha;
