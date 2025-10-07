@@ -1,4 +1,5 @@
-#![doc = include_str!("../README.md")]
+//! Library to generate strings of any type, by picking in vast sets of data.
+
 #![deny(
     bindings_with_variant_name,
     non_snake_case,
@@ -29,7 +30,6 @@
     clippy::allow_attributes,
     reason = "features can make lint unfulfilled"
 )]
-#![expect(clippy::doc_include_without_cfg, reason = "see issue #13918")]
 #![allow(clippy::blanket_clippy_restriction_lints, reason = "enable all lints")]
 #![allow(clippy::missing_docs_in_private_items, reason = "explicit names")]
 #![allow(clippy::non_ascii_literal, reason = "not-understandable")]
