@@ -1,5 +1,7 @@
 use std::collections::HashSet;
 
+use random_data::rand::{Rng, SeedableRng as _};
+use random_data::rand_chacha::ChaCha20Rng;
 use random_data::{DataGenerator, DataType};
 
 #[test]
@@ -120,14 +122,31 @@ fn seed() {
     let values0 = DataType::list()
         .iter()
         .map(|data_type| data_type.random(&mut generator0))
-        .take(20)
+        .take(100)
         .collect::<Vec<_>>();
 
     let values1 = DataType::list()
         .iter()
         .map(|data_type| data_type.random(&mut generator1))
-        .take(20)
+        .take(100)
         .collect::<Vec<_>>();
 
     assert_eq!(values0, values1);
+}
+
+#[test]
+fn external_generator() {
+    let mut raw_rng = ChaCha20Rng::seed_from_u64(0xdeadbeef);
+    let mut generator = DataGenerator::from(raw_rng.clone());
+    let data_rng = generator.rng();
+
+    let raw_values = (0..100)
+        .map(|_| raw_rng.random_bool(0.5))
+        .collect::<Vec<_>>();
+
+    let data_values = (0..100)
+        .map(|_| data_rng.random_bool(0.5))
+        .collect::<Vec<_>>();
+
+    assert_eq!(raw_values, data_values)
 }
